@@ -3,6 +3,7 @@
     <v-app-bar color="dark" dark>
       <v-toolbar-title>My Study App</v-toolbar-title>
     </v-app-bar>
+    <router-link to="/create">작성</router-link>
   </v-card>
 </template>
 

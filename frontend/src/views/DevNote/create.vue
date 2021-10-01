@@ -16,9 +16,13 @@
       ></v-select>
 
       <v-file-input
-        label="File input"
-        filled
+        :rules="rules"
+        accept="image/png, image/jpeg, image/bmp"
+        enctype="multipart/form-data"
+        placeholder="Pick an avatar"
         prepend-icon="mdi-camera"
+        label="File input"
+        @change="selectFile"
       ></v-file-input>
 
       <v-text-field
@@ -50,7 +54,7 @@
         @click="validate"
         type="submit"
       >
-        Validate
+        작성
       </v-btn>
 
       <v-btn color="error" class="mr-4" @click="reset">
@@ -58,7 +62,7 @@
       </v-btn>
 
       <v-btn color="warning" @click="resetValidation">
-        Reset Validation
+        리셋
       </v-btn>
     </v-form>
   </v-container>
@@ -80,17 +84,25 @@ export default {
       (v) => !!v || "E-mail is required",
       (v) => /.+@.+\..+/.test(v) || "E-mail must be valid",
     ],
-    select: null,
-    items: ["Item 1", "Item 2", "Item 3", "Item 4"],
+    select: "",
+    items: ["Java", "JavaScript", "laravel", "vue.js", "html"],
     checkbox: false,
+
+    rules: [
+      (value) =>
+        !value ||
+        value.size < 2000000 ||
+        "Avatar size should be less than 2 MB!",
+    ],
   }),
 
   methods: {
     onsubmitForm() {
-      console.log("test");
       const form = new FormData();
       form.append("title", this.title);
       form.append("content", this.content);
+      form.append("select", this.select);
+      form.append("image", this.image);
       axios
         .post("http://localhost:8000/api/store", form)
         .then((res) => {
@@ -110,6 +122,10 @@ export default {
     },
     resetValidation() {
       this.$refs.form.resetValidation();
+    },
+
+    selectFile(file) {
+      this.image = file;
     },
   },
 };
