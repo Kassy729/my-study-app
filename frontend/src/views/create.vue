@@ -39,63 +39,15 @@
 
         <v-divider class="my-2"></v-divider>
 
-        <v-item-group multiple v-model="tag">
-          <v-subheader>Tags</v-subheader>
-          <v-item v-slot="{ active, toggle }">
-            <v-chip
-              active-class="purple--text"
-              :input-value="active"
-              @click="toggle"
-            >
-              Java
-            </v-chip>
-          </v-item>
-          <v-item v-slot="{ active, toggle }">
-            <v-chip
-              active-class="purple--text"
-              :input-value="active"
-              @click="toggle"
-            >
-              JavaScript
-            </v-chip>
-          </v-item>
-          <v-item v-slot="{ active, toggle }">
-            <v-chip
-              active-class="purple--text"
-              :input-value="active"
-              @click="toggle"
-            >
-              Laravel
-            </v-chip>
-          </v-item>
-          <v-item v-slot="{ active, toggle }">
-            <v-chip
-              active-class="purple--text"
-              :input-value="active"
-              @click="toggle"
-            >
-              Vue.js
-            </v-chip>
-          </v-item>
-          <v-item v-slot="{ active, toggle }">
-            <v-chip
-              active-class="purple--text"
-              :input-value="active"
-              @click="toggle"
-            >
-              Android
-            </v-chip>
-          </v-item>
-          <v-item v-slot="{ active, toggle }">
-            <v-chip
-              active-class="purple--text"
-              :input-value="active"
-              @click="toggle"
-            >
-              Html
-            </v-chip>
-          </v-item>
-        </v-item-group>
+        <v-select
+          v-model="tag"
+          :items="states"
+          label="Select"
+          multiple
+          chips
+          hint="What are the target regions"
+          persistent-hint
+        ></v-select>
       </v-card-text>
 
       <v-divider></v-divider>
@@ -115,6 +67,16 @@ import axios from "axios";
 
 export default {
   data: () => ({
+    tag: [],
+    states: [
+      "Java",
+      "JavaScript",
+      "Laravel",
+      "Vue.js",
+      "React",
+      "Android",
+      "Html",
+    ],
     valid: true,
     title: "",
     nameRules: [
@@ -133,8 +95,6 @@ export default {
         value.size < 2000000 ||
         "Avatar size should be less than 2 MB!",
     ],
-
-    tag: "",
   }),
 
   methods: {

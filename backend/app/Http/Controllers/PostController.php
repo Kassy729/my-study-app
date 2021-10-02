@@ -9,8 +9,7 @@ class PostController extends Controller
 {
     public function store(Request $request)
     {
-        return $request;
-        $category = $request->select;
+        $category = $request->tag;
         $title = $request->title;
         $content = $request->content;
 
@@ -28,5 +27,18 @@ class PostController extends Controller
         }
 
         $post->save();
+    }
+
+    public function index()
+    {
+        $posts = Post::all();
+        $posts = Post::orderby('created_at', 'desc')->get();
+        return $posts;
+    }
+
+    public function show($id)
+    {
+        $post = Post::find($id);
+        return $post;
     }
 }

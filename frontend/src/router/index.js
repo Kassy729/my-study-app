@@ -1,8 +1,9 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
-import Create from "../views/DevNote/create.vue";
-import Test from "../views/DevNote/test.vue";
+import Create from "../views/create.vue";
+import Index from "../views/index.vue";
+import Show from "../views/show.vue";
 
 Vue.use(VueRouter);
 
@@ -18,9 +19,14 @@ const routes = [
     component: Create,
   },
   {
-    path: "/test",
-    name: "Test",
-    component: Test,
+    path: "/index",
+    name: "Index",
+    component: Index,
+  },
+  {
+    path: "/show/:postId",
+    name: "Show",
+    component: Show,
   },
 ];
 
