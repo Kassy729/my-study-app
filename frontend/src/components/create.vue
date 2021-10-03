@@ -1,65 +1,60 @@
 <template>
-  <v-card>
-    <v-toolbar flat color="blue-grey" dark>
-      <v-toolbar-title>개발일지 작성</v-toolbar-title>
-    </v-toolbar>
-    <v-form
-      ref="form"
-      @submit.prevent="onsubmitForm"
-      v-model="valid"
-      lazy-validation
-    >
-      <v-card-text>
-        <v-file-input
-          :rules="rules"
-          accept="image/png, image/jpeg, image/bmp"
-          enctype="multipart/form-data"
-          placeholder="Pick an avatar"
-          prepend-icon="mdi-camera"
-          label="File input"
-          @change="selectFile"
-        ></v-file-input>
+  <v-form
+    ref="form"
+    @submit.prevent="onsubmitForm"
+    v-model="valid"
+    lazy-validation
+  >
+    <v-card-text>
+      <v-file-input
+        :rules="rules"
+        accept="image/png, image/jpeg, image/bmp"
+        enctype="multipart/form-data"
+        placeholder="Pick an avatar"
+        prepend-icon="mdi-camera"
+        label="File input"
+        @change="selectFile"
+      ></v-file-input>
 
-        <v-text-field
-          filled
-          label="Title"
-          value="My new post"
-          v-model="title"
-          :counter="10"
-          :rules="nameRules"
-          required
-        ></v-text-field>
+      <v-text-field
+        filled
+        label="Title"
+        value="My new post"
+        v-model="title"
+        :counter="10"
+        :rules="nameRules"
+        required
+      ></v-text-field>
 
-        <v-textarea
-          filled
-          v-model="content"
-          label="Note"
-          background-color="amber lighten-4"
-        ></v-textarea>
+      <v-textarea
+        filled
+        v-model="content"
+        label="Note"
+        background-color="amber lighten-4"
+      ></v-textarea>
 
-        <v-divider class="my-2"></v-divider>
+      <v-divider class="my-2"></v-divider>
 
-        <v-select
-          v-model="tag"
-          :items="states"
-          label="Select"
-          multiple
-          chips
-          hint="What are the target regions"
-          persistent-hint
-        ></v-select>
-      </v-card-text>
+      <v-select
+        v-model="tag"
+        :items="states"
+        label="Select"
+        multiple
+        chips
+        hint="What are the target regions"
+        persistent-hint
+      ></v-select>
+    </v-card-text>
 
-      <v-divider></v-divider>
+    <v-divider></v-divider>
 
-      <v-card-actions>
-        <v-spacer></v-spacer>
-        <v-btn color="success" depressed type="submit">
-          Post
-        </v-btn>
-      </v-card-actions>
-    </v-form>
-  </v-card>
+    <v-card-actions>
+      <v-spacer></v-spacer>
+      <v-btn color="success" depressed type="submit">
+        Post
+      </v-btn>
+    </v-card-actions>
+  </v-form>
 </template>
 
 <script>

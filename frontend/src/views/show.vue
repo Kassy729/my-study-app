@@ -1,5 +1,7 @@
 <template>
-  <h1>show</h1>
+  <v-container>
+    <h1>show</h1>
+  </v-container>
 </template>
 
 <script>
