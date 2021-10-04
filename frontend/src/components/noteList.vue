@@ -1,24 +1,15 @@
 <template>
   <v-row>
-    <v-col cols="4" v-for="post in posts" :key="post.id">
-      <v-card class="mx-auto" max-width="400">
+    <v-col cols="10"><h3>최근 게시글</h3></v-col>
+    <v-col cols="6" v-for="post in posts" :key="post.id">
+      <v-card outlined class="mx-auto" max-width="400">
         <v-card-title @click="onClickPost(post.id)">{{
           post.title
         }}</v-card-title>
 
-        <v-card-text class="text--primary">
-          작성자 : 게시일 : {{ post.created_at }}
-        </v-card-text>
-
-        <v-card-actions>
-          <v-btn color="orange" text>
-            Share
-          </v-btn>
-
-          <v-btn color="orange" text>
-            Explore
-          </v-btn>
-        </v-card-actions>
+        <v-card-content>
+          {{ post.category }}
+        </v-card-content>
       </v-card>
     </v-col>
   </v-row>

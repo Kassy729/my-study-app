@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class PostController extends Controller
 {
@@ -32,7 +33,7 @@ class PostController extends Controller
     public function index()
     {
         $posts = Post::all();
-        $posts = Post::orderby('created_at', 'desc')->get();
+        $posts = Post::orderby('created_at', 'desc')->limit(6)->get();
         return $posts;
     }
 
