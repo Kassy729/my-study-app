@@ -1,29 +1,84 @@
 <template>
-  <v-container>
-    <h1>show</h1>
-  </v-container>
+  <div>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+      crossorigin="anonymous"
+    />
+    <menu-table />
+    <v-container>
+      <img
+        :src="`http://localhost:8000/storage/images/${post.image}`"
+        style="width: 40rem;"
+        class="card-img-top"
+        alt="my post image"
+      />
+      <div class="mb-3">
+        <label for="title" class="form-label">제목</label>
+        <input
+          type="text"
+          class="form-control"
+          name="title"
+          v-model="post.title"
+          readonly
+          placeholder="제목"
+        />
+      </div>
+      <div class="mb-3">
+        <label for="exampleFormControlTextarea1" class="form-label">내용</label>
+        <textarea
+          class="form-control"
+          name="content"
+          rows="3"
+          v-model="post.content"
+          readonly
+          placeholder="내용"
+        ></textarea>
+      </div>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">사용언어 : {{ post.category }}</li>
+        <li class="list-group-item">등록일 : {{ post.created_at }}</li>
+        <li class="list-group-item">작성자 : {{ post.user.name }}</li>
+      </ul>
+    </v-container>
+  </div>
 </template>
 
 <script>
 import axios from "axios";
+import MenuTable from "../components/menu.vue";
 
 export default {
+  components: {
+    MenuTable,
+  },
   data() {
     return {
-      posts: [],
+      post: [],
+      //   imagePath: "http://localhost:8000/storage/images/",
+      //   image: this.post.image,
     };
   },
   mounted() {
     axios
       .get("http://localhost:8000/api/show/" + this.$route.params.postId)
       .then((res) => {
-        this.post = res.data;
         console.log(res.data);
+        this.post = res.data;
       })
       .catch((err) => {
         console.log(err);
-        alert("실패");
       });
+  },
+  methods: {
+    imageTest(img) {
+      if (!img) {
+        return "noimage.jpg";
+      } else {
+        return img;
+      }
+    },
   },
 };
 </script>
