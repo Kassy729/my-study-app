@@ -43,17 +43,18 @@
         <li class="list-group-item">작성자 : {{ post.user.name }}</li>
       </ul>
 
-      <div>
-        <v-btn tile color="success" @click="onClickUpdate(post.id)">
+      <v-row align="center" justify="space-around">
+        <v-btn tile color="success" class="m-2">
           <v-icon left>
             mdi-pencil
           </v-icon>
-          Edit
+          Post
         </v-btn>
-        <v-btn depressed color="error" class="m-1">
-          Delete
+        <v-btn color="primary">
+          돌아가기
         </v-btn>
-      </div>
+        <!-- <router-link to="/show/{{ post.id }}">목록보기</router-link> -->
+      </v-row>
     </v-container>
   </div>
 </template>
@@ -69,8 +70,6 @@ export default {
   data() {
     return {
       post: [],
-      //   imagePath: "http://localhost:8000/storage/images/",
-      //   image: this.post.image,
     };
   },
   mounted() {

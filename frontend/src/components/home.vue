@@ -43,7 +43,7 @@ export default {
   data() {
     return {
       posts: [],
-      selectedComponent: "create",
+      selectedComponent: "noteList",
     };
   },
   components: {

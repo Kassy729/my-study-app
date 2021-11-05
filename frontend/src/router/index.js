@@ -2,6 +2,7 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
 import Show from "../views/show.vue";
+import Update from "../views/edit.vue";
 
 Vue.use(VueRouter);
 
@@ -15,6 +16,11 @@ const routes = [
     path: "/show/:postId",
     name: "Show",
     component: Show,
+  },
+  {
+    path: "/update/:postId",
+    name: "Update",
+    component: Update,
   },
 ];
 
