@@ -8,53 +8,61 @@
     />
     <menu-table />
     <v-container>
-      <img
-        :src="`http://localhost:8000/storage/images/${post.image}`"
-        style="width: 40rem;"
-        class="card-img-top"
-        alt="my post image"
-      />
-
-      <div class="mb-3">
-        <label for="title" class="form-label">제목</label>
-        <input
-          type="text"
-          class="form-control"
-          name="title"
-          v-model="post.title"
-          readonly
-          placeholder="제목"
+      <v-form ref="form" @submit.prevent="onEditForm">
+        <v-img
+          v-if="post.image"
+          :src="`http://localhost:8000/storage/images/${post.image}`"
+          style="width: 40rem;"
+          class="card-img-top"
+          alt="my post image"
         />
-      </div>
-      <div class="mb-3">
-        <label for="exampleFormControlTextarea1" class="form-label">내용</label>
-        <textarea
-          class="form-control"
-          name="content"
-          rows="10"
-          v-model="post.content"
-          readonly
-          placeholder="내용"
-        ></textarea>
-      </div>
-      <ul class="list-group list-group-flush">
-        <li class="list-group-item">사용언어 : {{ post.category }}</li>
-        <li class="list-group-item">등록일 : {{ post.created_at }}</li>
-        <li class="list-group-item">작성자 : {{ post.user.name }}</li>
-      </ul>
+        <div class="mb-3">
+          <v-file-input
+            enctype="multipart/form-data"
+            placeholder="Pick an avatar"
+            prepend-icon="mdi-camera"
+            name="image"
+            label="File input"
+            @change="selectFile"
+          ></v-file-input>
+          <label for="title" class="form-label">제목</label>
+          <input
+            type="text"
+            class="form-control"
+            name="title"
+            v-model="post.title"
+            placeholder="제목"
+          />
+        </div>
+        <div class="mb-3">
+          <label for="exampleFormControlTextarea1" class="form-label"
+            >내용</label
+          >
+          <textarea
+            class="form-control"
+            name="content"
+            rows="10"
+            v-model="post.content"
+            placeholder="내용"
+          ></textarea>
+        </div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">사용언어 : {{ post.category }}</li>
+          <li class="list-group-item">등록일 : {{ post.created_at }}</li>
+          <!-- <li class="list-group-item">작성자 : {{ post.user.name }}</li> -->
+        </ul>
 
-      <v-row align="center" justify="space-around">
-        <v-btn tile color="success" class="m-2">
-          <v-icon left>
-            mdi-pencil
-          </v-icon>
-          Post
-        </v-btn>
-        <v-btn color="primary">
-          돌아가기
-        </v-btn>
-        <!-- <router-link to="/show/{{ post.id }}">목록보기</router-link> -->
-      </v-row>
+        <v-row align="center" justify="space-around">
+          <v-btn tile color="success" class="m-2" type="submit">
+            <v-icon left>
+              mdi-pencil
+            </v-icon>
+            Post
+          </v-btn>
+
+          <router-link :to="`/show/${post.id}`">돌아가기</router-link>
+        </v-row>
+      </v-form>
     </v-container>
   </div>
 </template>
@@ -70,6 +78,7 @@ export default {
   data() {
     return {
       post: [],
+      image: "",
     };
   },
   mounted() {
@@ -84,6 +93,24 @@ export default {
       });
   },
   methods: {
+    onEditForm() {
+      const form = new FormData();
+      form.append("title", this.post.title);
+      form.append("content", this.post.content);
+      form.append("image", this.image);
+      axios
+        .post(
+          "http://localhost:8000/api/update/" + this.$route.params.postId,
+          form
+        )
+        .then(() => {
+          window.location.href =
+            "http://localhost:8080/show/" + this.$route.params.postId;
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
     imageTest(img) {
       if (!img) {
         return "noimage.jpg";
@@ -93,6 +120,9 @@ export default {
     },
     onClickUpdate(id) {
       this.$router.push({ path: "/update/" + id });
+    },
+    selectFile(file) {
+      this.image = file;
     },
   },
 };

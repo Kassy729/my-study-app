@@ -8,7 +8,8 @@
     />
     <menu-table />
     <v-container>
-      <img
+      <v-img
+        v-if="post.image"
         :src="`http://localhost:8000/storage/images/${post.image}`"
         style="width: 40rem;"
         class="card-img-top"
@@ -40,7 +41,7 @@
       <ul class="list-group list-group-flush">
         <li class="list-group-item">사용언어 : {{ post.category }}</li>
         <li class="list-group-item">등록일 : {{ post.created_at }}</li>
-        <li class="list-group-item">작성자 : {{ post.user.name }}</li>
+        <!-- <li class="list-group-item">작성자 : {{ post.user.name }}</li> -->
       </ul>
 
       <div>
@@ -50,9 +51,15 @@
           </v-icon>
           Edit
         </v-btn>
-        <v-btn depressed color="error" class="m-1">
+        <v-btn
+          depressed
+          color="error"
+          class="m-1"
+          @click="onClickDelete(post.id)"
+        >
           Delete
         </v-btn>
+        <router-link to="/"><v-icon>mdi-home</v-icon></router-link>
       </div>
     </v-container>
   </div>
@@ -85,15 +92,26 @@ export default {
       });
   },
   methods: {
-    imageTest(img) {
-      if (!img) {
-        return "noimage.jpg";
-      } else {
-        return img;
-      }
-    },
+    // imageTest(img) {
+    //   if (!img) {
+    //     return "noimage.jpg";
+    //   } else {
+    //     return img;
+    //   }
+    // },
     onClickUpdate(id) {
       this.$router.push({ path: "/update/" + id });
+    },
+    onClickDelete() {
+      axios
+        .delete("http://localhost:8000/api/" + this.$route.params.postId)
+        .then(() => {
+          window.location.href = "http://localhost:8080";
+        })
+        .catch((err) => {
+          console.log(err);
+          alert("실패");
+        });
     },
   },
 };

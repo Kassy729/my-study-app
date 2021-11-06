@@ -22,7 +22,6 @@
         value="My new post"
         v-model="title"
         :counter="10"
-        :rules="nameRules"
         required
       ></v-text-field>
 
@@ -74,15 +73,8 @@ export default {
     ],
     valid: true,
     title: "",
-    nameRules: [
-      (v) => !!v || "Name is required",
-      (v) => (v && v.length <= 10) || "Name must be less than 10 characters",
-    ],
+
     content: "",
-    emailRules: [
-      (v) => !!v || "E-mail is required",
-      (v) => /.+@.+\..+/.test(v) || "E-mail must be valid",
-    ],
 
     rules: [
       (value) =>
@@ -103,7 +95,7 @@ export default {
         .post("http://localhost:8000/api/store", form)
         .then((res) => {
           console.log(res);
-          window.location.href = "http://localhost:8080/index";
+          window.location.href = "http://localhost:8080";
         })
         .catch((err) => {
           console.log(err);

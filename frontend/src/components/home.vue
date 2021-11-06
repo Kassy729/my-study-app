@@ -4,7 +4,7 @@
     <v-app-bar align="center">
       <v-row>
         <v-col>
-          <v-btn text @click="selectedComponent = 'home'">
+          <v-btn text @click="selectedComponent = 'Main'">
             <v-icon large color="black"> mdi-home </v-icon>
             Home</v-btn
           >
@@ -38,12 +38,13 @@ import noteList from "../components/noteList.vue";
 import profile from "../components/profile.vue";
 import todoList from "../components/todolist.vue";
 import MenuTable from "../components/menu.vue";
+import Main from "../components/main.vue";
 
 export default {
   data() {
     return {
       posts: [],
-      selectedComponent: "noteList",
+      selectedComponent: "Main",
     };
   },
   components: {
@@ -52,6 +53,7 @@ export default {
     profile,
     todoList,
     MenuTable,
+    Main,
   },
 };
 </script>
