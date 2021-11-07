@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\PostController;
 use App\Models\Post;
 use Illuminate\Http\Request;
@@ -31,3 +32,7 @@ Route::get('/show/{id}', [PostController::class, 'show']);
 Route::post('/update/{id}', [PostController::class, "update"]);
 
 Route::delete('/{id}', [PostController::class, "destroy"]);
+
+Route::post('/comment/{id}', [CommentController::class, "store"]);
+
+Route::get('/comment/{id}', [CommentController::class, "index"]);

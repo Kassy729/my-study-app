@@ -13,4 +13,6 @@ v-col cols="auto"
 $posts = Post::orderby('created_at', 'desc')->limit(6)->get();
 최근 게시글 6개만 가져옴
 
+vue laravel 서버를 따로 사용 할 때 이미지를 화면에 출력하기 위해서는 form 안에 넣어서 보내야한다
+
 

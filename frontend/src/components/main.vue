@@ -52,9 +52,7 @@ export default {
     axios
       .get(`http://localhost:8000/api/index`)
       .then((res) => {
-        console.log(res);
         this.posts = res.data;
-        console.log(this.posts);
       })
       .catch((err) => {
         console.log(err);

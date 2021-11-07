@@ -47,13 +47,10 @@ export default {
     posts: [],
   }),
   mounted() {
-    console.log("test");
     axios
       .get(`http://localhost:8000/api/index`)
       .then((res) => {
-        console.log(res);
         this.posts = res.data;
-        console.log(this.posts);
       })
       .catch((err) => {
         console.log(err);
@@ -64,11 +61,9 @@ export default {
       this.$router.push({ path: "/show/" + id });
     },
     getPage(url) {
-      console.log(url);
       axios
         .get(url)
         .then((res) => {
-          console.log(res);
           this.posts = res.data;
         })
         .catch((err) => {

@@ -61,6 +61,10 @@
         </v-btn>
         <router-link to="/"><v-icon>mdi-home</v-icon></router-link>
       </div>
+      <div class="m-3">
+        <comment-index :post="post" />
+        <comment-create :post="post" />
+      </div>
     </v-container>
   </div>
 </template>
@@ -68,10 +72,14 @@
 <script>
 import axios from "axios";
 import MenuTable from "../components/menu.vue";
+import commentCreate from "../components/comment/commentCreate.vue";
+import CommentIndex from "../components/comment/commentIndex.vue";
 
 export default {
   components: {
     MenuTable,
+    commentCreate,
+    CommentIndex,
   },
   data() {
     return {
@@ -84,7 +92,6 @@ export default {
     axios
       .get("http://localhost:8000/api/show/" + this.$route.params.postId)
       .then((res) => {
-        console.log(res.data);
         this.post = res.data;
       })
       .catch((err) => {
