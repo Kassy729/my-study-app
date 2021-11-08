@@ -1,18 +1,29 @@
 <template>
   <div id="todo-app">
-    <h1>MY-TODO-</h1>
+    <h1>MY-TODO</h1>
     <todo-input />
     <todo-list />
     <todo-clear />
+    <v-btn @click="onClickReturn">돌아가기</v-btn>
   </div>
 </template>
 
 <script>
-import TodoClear from "./TodoClear.vue";
-import TodoInput from "./TodoInput.vue";
-import TodoList from "./TodoList.vue";
+import TodoInput from "./TodoInput";
+import TodoList from "./TodoList";
+import TodoClear from "./TodoClear";
 export default {
-  components: { TodoInput, TodoList, TodoClear },
+  name: "todo-app",
+  components: {
+    TodoInput,
+    TodoList,
+    TodoClear,
+  },
+  methods: {
+    onClickReturn() {
+      this.$router.push({ path: "/" });
+    },
+  },
 };
 </script>
 

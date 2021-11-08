@@ -16,7 +16,7 @@
             <v-icon large color="black"> mdi-book-open-variant</v-icon
             >Note목록보기</v-btn
           >
-          <v-btn text @click="selectedComponent = 'todoList'">
+          <v-btn text @click="onClickTodoList">
             <v-icon large color="black"> mdi-clipboard-edit-outline </v-icon
             >TodoList</v-btn
           >
@@ -36,7 +36,6 @@
 import create from "../components/create.vue";
 import noteList from "../components/noteList.vue";
 import profile from "../components/profile.vue";
-import todoList from "../components/todolist.vue";
 import MenuTable from "../components/menu.vue";
 import Main from "../components/main.vue";
 
@@ -51,9 +50,14 @@ export default {
     create,
     noteList,
     profile,
-    todoList,
     MenuTable,
     Main,
+  },
+  methods: {
+    onClickTodoList() {
+      console.log("test");
+      this.$router.push({ path: "/todoList" });
+    },
   },
 };
 </script>

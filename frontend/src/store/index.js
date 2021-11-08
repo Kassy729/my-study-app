@@ -1,6 +1,6 @@
 import Vue from "vue";
 import Vuex from "vuex";
-import Constant from "../components/constant";
+import Constant from "./modules/constant";
 
 Vue.use(Vuex);
 
@@ -36,27 +36,27 @@ const store = new Vuex.Store({
       });
     },
 
-    // [Constant.DELETE_ALL]: (state, payload) => {
-    //   localStorage.clear();
-    //   state.todoList = [];
-    // },
+    [Constant.DELETE_ALL]: (state) => {
+      localStorage.clear();
+      state.todoList = [];
+    },
 
     [Constant.DELETE_TODO]: (state, payload) => {
       localStorage.removeItem(payload.todo);
       state.todoList.splice(payload.index, 1);
     },
 
-    // [Constant.SHOW_LIST]: (state, payload) => {
-    //   for (let i = 0; i < localStorage.length; i++) {
-    //     let localKey = localStorage.key(i);
-    //     if (localKey === "loglevel:webpack-dev-server") continue;
+    [Constant.SHOW_LIST]: (state) => {
+      for (let i = 0; i < localStorage.length; i++) {
+        let localKey = localStorage.key(i);
+        if (localKey === "loglevel:webpack-dev-server") continue;
 
-    //     state.todoList.push({
-    //       todo: localKey,
-    //       done: JSON.parse(localStorage[localKey]).done,
-    //     });
-    //   }
-    // },
+        state.todoList.push({
+          todo: localKey,
+          done: JSON.parse(localStorage[localKey]).done,
+        });
+      }
+    },
   },
 });
 

@@ -3,6 +3,7 @@ import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
 import Show from "../views/show.vue";
 import Update from "../views/edit.vue";
+import TodoList from "../views/todoList.vue";
 
 Vue.use(VueRouter);
 
@@ -21,6 +22,11 @@ const routes = [
     path: "/update/:postId",
     name: "Update",
     component: Update,
+  },
+  {
+    path: "/todoList",
+    name: "TodoList",
+    component: TodoList,
   },
 ];
 

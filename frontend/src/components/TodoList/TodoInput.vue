@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import Constant from "../constant";
+import Constant from "../../store/modules/constant";
 export default {
   name: "todo-input",
   data() {

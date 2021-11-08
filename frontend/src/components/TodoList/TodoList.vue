@@ -20,7 +20,7 @@
 </template>
 
 <script>
-import Constant from "../constant";
+import Constant from "../../store/modules/constant";
 // import _ from 'lodash'
 export default {
   name: "todo-list",

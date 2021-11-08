@@ -1,11 +1,12 @@
 <template>
   <div id="clear-all" @click="clearAll">
-    <span>CLEAR</span>
+    <span>Delete</span>
   </div>
 </template>
 
 <script>
-import Constant from "../constant";
+import Constant from "../../store/modules/constant";
+
 export default {
   name: "todo-clear",
   methods: {
