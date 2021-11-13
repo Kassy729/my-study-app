@@ -4,6 +4,7 @@ import Home from "../views/Home.vue";
 import Show from "../views/show.vue";
 import Update from "../views/edit.vue";
 import Register from "../views/register.vue";
+import Login from "../views/login.vue";
 
 import TodoList from "../views/todoList.vue";
 
@@ -34,6 +35,11 @@ const routes = [
     path: "/register",
     name: "Register",
     component: Register,
+  },
+  {
+    path: "/login",
+    name: "Login",
+    component: Login,
   },
 ];
 

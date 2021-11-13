@@ -109,7 +109,8 @@ export default {
           password_confirmation: this.password_confirmation,
         })
         .then((res) => {
-          console.log(res.data);
+          console.log(res.status);
+          this.$router.push("/login");
         })
         .catch((err) => {
           console.log("가입이 안됐어용ㅠ");

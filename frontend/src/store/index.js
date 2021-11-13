@@ -1,3 +1,4 @@
+import axios from "axios";
 import Vue from "vue";
 import Vuex from "vuex";
 import Constant from "./modules/constant";
@@ -7,6 +8,7 @@ Vue.use(Vuex);
 const store = new Vuex.Store({
   state: {
     todoList: [],
+    user: null,
   },
   mutations: {
     [Constant.ADD_TODO]: (state, payload) => {
@@ -55,6 +57,29 @@ const store = new Vuex.Store({
           todo: localKey,
           done: JSON.parse(localStorage[localKey]).done,
         });
+      }
+    },
+
+    setUserData(state, userData) {
+      state.user = userData;
+      localStorage.setItem("user", JSON.stringify(userData));
+      axios.defaults.headers.common.Authorization = `Bearer ${userData.token}`;
+    },
+  },
+  actions: {
+    async login({ commit }, credentials) {
+      try {
+        const response = await axios.get(
+          "http://localhost:8000/sanctum/csrf-cookie"
+        );
+        console.log(response.status);
+        const { data } = await axios.post(
+          "http://localhost:8000/api/login",
+          credentials
+        );
+        commit("setUserData", data);
+      } catch (err) {
+        console.log(err);
       }
     },
   },
