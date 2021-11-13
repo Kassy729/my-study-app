@@ -90,7 +90,7 @@ export default {
   },
   mounted() {
     axios
-      .get("http://localhost:8000/api/show/" + this.$route.params.postId)
+      .get("/api/show/" + this.$route.params.postId)
       .then((res) => {
         this.post = res.data;
       })

@@ -55,7 +55,6 @@ export default {
   },
   methods: {
     onClickTodoList() {
-      console.log("test");
       this.$router.push({ path: "/todoList" });
     },
   },

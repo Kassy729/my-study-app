@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\RegisterController;
 use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -36,3 +37,5 @@ Route::delete('/{id}', [PostController::class, "destroy"]);
 Route::post('/comment/{id}', [CommentController::class, "store"]);
 
 Route::get('/comment/{id}', [CommentController::class, "index"]);
+
+Route::post('/register', [RegisterController::class, 'store']);

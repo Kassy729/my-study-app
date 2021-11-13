@@ -1,6 +1,6 @@
 <template>
   <div>
-    <!-- <label for="exampleFormControlInput1" class="form-label">댓글</label>
+    <label for="exampleFormControlInput1" class="form-label">댓글</label>
     <table class="table table-hover mt-5">
       <thead>
         <tr>
@@ -13,7 +13,7 @@
       <tbody v-for="comment in comments" :key="comment.id">
         <tr>
           <td>{{ comment.comment }}</td>
-          <td>{{ comment.user.name }}</td>
+          <!-- <td>{{ comment.user.name }}</td> -->
           <td>
             <button class="btn btn-warning" @click="onClickEdit">
               수정
@@ -26,7 +26,7 @@
           </td>
         </tr>
       </tbody>
-    </table> -->
+    </table>
     test
   </div>
 </template>
@@ -47,15 +47,18 @@ export default {
   methods: {
     getComment() {
       axios
-        .get("http://localhost:8000/api/comment/" + this.post.id)
+        .get("/api/comment/" + this.post.id)
         .then((res) => {
           console.log(res.data);
-          // this.comments = res;
+          this.comments = res.data;
+          console.log(this.comments);
         })
         .catch((err) => {
           console.log(err);
         });
     },
+    onClickEdit() {},
+    onClickDelete() {},
   },
 };
 </script>

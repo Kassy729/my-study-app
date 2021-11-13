@@ -83,7 +83,7 @@ export default {
   },
   mounted() {
     axios
-      .get("http://localhost:8000/api/show/" + this.$route.params.postId)
+      .get("/api/show/" + this.$route.params.postId)
       .then((res) => {
         console.log(res.data);
         this.post = res.data;
@@ -99,10 +99,7 @@ export default {
       form.append("content", this.post.content);
       form.append("image", this.image);
       axios
-        .post(
-          "http://localhost:8000/api/update/" + this.$route.params.postId,
-          form
-        )
+        .post("/api/update/" + this.$route.params.postId, form)
         .then(() => {
           window.location.href =
             "http://localhost:8080/show/" + this.$route.params.postId;

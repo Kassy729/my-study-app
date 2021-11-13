@@ -23,8 +23,8 @@ class CommentController extends Controller
 
     public function index($id)
     {
-        return $id;
-        $comments = Comment::where('post_id', $id)->with('user')->get();
+        // $comments = Comment::where('post_id', $id)->with('user')->get();
+        $comments = Comment::all();
         // $comments = Comment::with('user')->where('post_id', $id)->latest()->get();
         return $comments;
     }

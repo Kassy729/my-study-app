@@ -92,7 +92,7 @@ export default {
       form.append("tag", this.tag);
       form.append("image", this.image);
       axios
-        .post("http://localhost:8000/api/store", form)
+        .post("/api/store", form)
         .then((res) => {
           console.log(res);
           window.location.href = "http://localhost:8080";

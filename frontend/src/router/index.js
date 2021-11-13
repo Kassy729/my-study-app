@@ -3,6 +3,8 @@ import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
 import Show from "../views/show.vue";
 import Update from "../views/edit.vue";
+import Register from "../views/register.vue";
+
 import TodoList from "../views/todoList.vue";
 
 Vue.use(VueRouter);
@@ -27,6 +29,11 @@ const routes = [
     path: "/todoList",
     name: "TodoList",
     component: TodoList,
+  },
+  {
+    path: "/register",
+    name: "Register",
+    component: Register,
   },
 ];
 

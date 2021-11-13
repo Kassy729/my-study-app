@@ -22,6 +22,7 @@ export default {
   methods: {
     onClickReturn() {
       this.$router.push({ path: "/" });
+      location.reload();
     },
   },
 };

@@ -48,7 +48,7 @@ export default {
   }),
   mounted() {
     axios
-      .get(`http://localhost:8000/api/index`)
+      .get(`/api/index`)
       .then((res) => {
         this.posts = res.data;
       })
