@@ -46,6 +46,7 @@ export default {
       selectedComponent: "Main",
     };
   },
+
   components: {
     create,
     noteList,

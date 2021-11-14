@@ -11,6 +11,12 @@ const store = new Vuex.Store({
     user: null,
   },
   mutations: {
+    setUserData(state, userData) {
+      state.user = userData;
+      localStorage.setItem("user", JSON.stringify(userData));
+      axios.defaults.headers.common.Authorization = `Bearer ${userData.token}`;
+    },
+
     [Constant.ADD_TODO]: (state, payload) => {
       if (payload.todo !== "") {
         localStorage.setItem(
@@ -58,12 +64,6 @@ const store = new Vuex.Store({
           done: JSON.parse(localStorage[localKey]).done,
         });
       }
-    },
-
-    setUserData(state, userData) {
-      state.user = userData;
-      localStorage.setItem("user", JSON.stringify(userData));
-      axios.defaults.headers.common.Authorization = `Bearer ${userData.token}`;
     },
   },
   actions: {

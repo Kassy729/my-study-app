@@ -10,7 +10,7 @@
     </v-row>
 
     <v-row>
-      <h1>2yubi</h1>
+      <h1>{{ userName }}</h1>
     </v-row>
 
     <v-row>
@@ -28,3 +28,16 @@
     </v-row>
   </v-container>
 </template>
+
+<script>
+export default {
+  data() {
+    return {};
+  },
+  computed: {
+    userName() {
+      return this.$store.state.user.user.name;
+    },
+  },
+};
+</script>
