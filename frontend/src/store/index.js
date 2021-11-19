@@ -17,6 +17,12 @@ const store = new Vuex.Store({
       axios.defaults.headers.common.Authorization = `Bearer ${userData.token}`;
     },
 
+    clearUserData(state) {
+      state.user = null;
+      localStorage.removeItem("user");
+      location.reload();
+    },
+
     [Constant.ADD_TODO]: (state, payload) => {
       if (payload.todo !== "") {
         localStorage.setItem(
@@ -72,15 +78,18 @@ const store = new Vuex.Store({
         const response = await axios.get("/sanctum/csrf-cookie");
 
         console.log(response.status);
-        const { data } = await axios.post(
-          "http://localhost:8000/api/login",
-          credentials
-        );
+        const { data } = await axios.post("/api/login", credentials);
 
         commit("setUserData", data);
       } catch (err) {
         console.log(err);
       }
+    },
+    logout({ commit }) {
+      axios.post("/api/logout").then((res) => {
+        console.log(res.data);
+      });
+      commit("clearUserData");
     },
   },
 });

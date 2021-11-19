@@ -29,7 +29,7 @@ export default {
       axios
         .post("http://localhost:8000/api/comment/" + this.post.id, form)
         .then((res) => {
-          console.log(res.data);
+          console.log(res);
           // location.reload();
           //페이지 새로고침
         })

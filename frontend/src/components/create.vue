@@ -91,10 +91,11 @@ export default {
       form.append("content", this.content);
       form.append("tag", this.tag);
       form.append("image", this.image);
+      form.append("user_id", this.$store.state.user.user.id);
       axios
         .post("/api/store", form)
         .then((res) => {
-          console.log(res);
+          console.log(res.data);
           window.location.href = "http://localhost:8080";
         })
         .catch((err) => {

@@ -9,7 +9,11 @@
       ></v-img>
     </v-row>
 
-    <v-row>
+    <v-row v-if="this.$store.state.user == null">
+      <h1>비로그인</h1>
+    </v-row>
+
+    <v-row v-else>
       <h1>{{ userName }}</h1>
     </v-row>
 

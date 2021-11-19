@@ -45,3 +45,5 @@ Route::get('/comment/{id}', [CommentController::class, "index"]);
 Route::post('/register', [RegisterController::class, 'store']);
 
 Route::post('/login', [LoginController::class, 'authenticate']);
+
+Route::middleware('auth:sanctum')->post('/logout', [LoginController::class, 'logout']);

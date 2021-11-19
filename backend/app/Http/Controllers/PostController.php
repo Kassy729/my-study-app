@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
@@ -14,12 +15,13 @@ class PostController extends Controller
         $category = $request->tag;
         $title = $request->title;
         $content = $request->content;
+        $user_id = $request->user_id;
 
         $post = new Post();
         $post->category = $category;
         $post->title = $title;
         $post->content = $content;
-        $post->user_id = "1";
+        $post->user_id = $user_id;
 
         $fileName = null;
         if ($request->hasFile('image')) {

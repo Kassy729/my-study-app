@@ -41,7 +41,7 @@
       <ul class="list-group list-group-flush">
         <li class="list-group-item">사용언어 : {{ post.category }}</li>
         <li class="list-group-item">등록일 : {{ post.created_at }}</li>
-        <!-- <li class="list-group-item">작성자 : {{ post.user.name }}</li> -->
+        <li class="list-group-item">작성자 : {{ post.user.name }}</li>
       </ul>
 
       <div>
