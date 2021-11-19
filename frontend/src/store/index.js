@@ -69,14 +69,14 @@ const store = new Vuex.Store({
   actions: {
     async login({ commit }, credentials) {
       try {
-        const response = await axios.get(
-          "http://localhost:8000/sanctum/csrf-cookie"
-        );
+        const response = await axios.get("/sanctum/csrf-cookie");
+
         console.log(response.status);
         const { data } = await axios.post(
           "http://localhost:8000/api/login",
           credentials
         );
+
         commit("setUserData", data);
       } catch (err) {
         console.log(err);

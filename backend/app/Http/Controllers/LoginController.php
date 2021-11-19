@@ -2,25 +2,36 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class LoginController extends Controller
 {
     public function authenticate(Request $request)
     {
-        $credentials = $request->validate([
-            'email' => ['required', 'email'],
-            'password' => ['required'],
+        $data = $request->validate([
+            'email' => 'required|email',
+            'password' => 'required',
+
         ]);
 
-        if (Auth::attempt($credentials)) {
-            $request->session()->regenerate();
-            return redirect()->intended('dashboard');
+        $user = User::where('email', $request->email)->first();
+
+        if (!$user || !Hash::check($request->password, $user->password)) {
+            return response([
+                'message' => ['These credentials do not match our records.']
+            ], 404);
         }
 
-        return back()->withErrors([
-            'email' => 'The provided credentials do not match our records.'
-        ]);
+        $token = $user->createToken('my-app-token')->plainTextToken;
+
+        $response = [
+            'user' => $user,
+            'token' => $token
+        ];
+
+        return response($response, 201);
     }
 }

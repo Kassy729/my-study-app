@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\RegisterController;
 use App\Models\Post;
@@ -43,26 +44,4 @@ Route::get('/comment/{id}', [CommentController::class, "index"]);
 
 Route::post('/register', [RegisterController::class, 'store']);
 
-Route::post('/login', function (Request $request) {
-    $request->validate([
-        'email' => 'required|email',
-        'password' => 'required',
-    ]);
-
-    $user = User::where('email', $request->email)->first();
-
-    if (!$user || !Hash::check($request->password, $user->password)) {
-        return response([
-            'message' => ['These credentials do not match our records.']
-        ], 404);
-    }
-
-    $token = $user->createToken('my-app-token')->plainTextToken;
-
-    $response = [
-        'user' => $user,
-        'token' => $token
-    ];
-
-    return response($response, 201);
-});
+Route::post('/login', [LoginController::class, 'authenticate']);
