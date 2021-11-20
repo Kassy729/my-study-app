@@ -9,7 +9,7 @@
       ></v-img>
     </v-row>
 
-    <v-row v-if="this.$store.state.user == null">
+    <v-row v-if="this.$store.state.auth.user == null">
       <h1>비로그인</h1>
     </v-row>
 
@@ -34,14 +34,26 @@
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
   data() {
     return {};
   },
   computed: {
     userName() {
-      return this.$store.state.user.user.name;
+      return this.$store.state.auth.user.user.name;
     },
+  },
+  mounted() {
+    axios
+      .get(`/api/user`)
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   },
 };
 </script>

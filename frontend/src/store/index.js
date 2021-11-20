@@ -1,31 +1,24 @@
-import axios from "axios";
 import Vue from "vue";
 import Vuex from "vuex";
-import Constant from "./modules/constant";
 
 Vue.use(Vuex);
 
+import Constant from "./modules/constant";
+import auth from "./modules/auth";
+
 const store = new Vuex.Store({
+  modules: {
+    Constant: Constant,
+    auth,
+  },
   state: {
     todoList: [],
-    user: null,
   },
   mutations: {
-    setUserData(state, userData) {
-      state.user = userData;
-      localStorage.setItem("user", JSON.stringify(userData));
-      axios.defaults.headers.common.Authorization = `Bearer ${userData.token}`;
-    },
-
-    clearUserData(state) {
-      state.user = null;
-      localStorage.removeItem("user");
-      location.reload();
-    },
-
     [Constant.ADD_TODO]: (state, payload) => {
       if (payload.todo !== "") {
         localStorage.setItem(
+          "todo",
           payload.todo,
           JSON.stringify({
             todo: payload.todo,
@@ -70,26 +63,6 @@ const store = new Vuex.Store({
           done: JSON.parse(localStorage[localKey]).done,
         });
       }
-    },
-  },
-  actions: {
-    async login({ commit }, credentials) {
-      try {
-        const response = await axios.get("/sanctum/csrf-cookie");
-
-        console.log(response.status);
-        const { data } = await axios.post("/api/login", credentials);
-
-        commit("setUserData", data);
-      } catch (err) {
-        console.log(err);
-      }
-    },
-    logout({ commit }) {
-      axios.post("/api/logout").then((res) => {
-        console.log(res.data);
-      });
-      commit("clearUserData");
     },
   },
 });

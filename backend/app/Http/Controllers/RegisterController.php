@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class RegisterController extends Controller
@@ -25,5 +26,11 @@ class RegisterController extends Controller
         $user->password = Hash::make($request->password);
         $user->save();
         return response($user, 202);
+    }
+
+    public function user()
+    {
+        return 1;
+        // return Auth::user()->id;
     }
 }

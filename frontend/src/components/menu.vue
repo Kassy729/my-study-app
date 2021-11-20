@@ -12,7 +12,7 @@
         outlined
         color="white"
         @click="login"
-        v-if="this.$store.state.user == null"
+        v-if="this.$store.state.auth.user == null"
       >
         Sign up
       </v-btn>
@@ -33,7 +33,7 @@ export default {
       this.$router.push({ path: "/login" });
     },
     logout() {
-      this.$store.dispatch("logout");
+      this.$store.dispatch("auth/logout");
     },
   },
 };

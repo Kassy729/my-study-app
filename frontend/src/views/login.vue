@@ -53,12 +53,12 @@ export default {
   methods: {
     login() {
       this.$store
-        .dispatch("login", {
+        .dispatch("auth/login", {
           email: this.email,
           password: this.password,
         })
         .then(() => {
-          if (!this.$store.state.user) {
+          if (!this.$store.state.auth.user) {
             console.log("login failed");
             alert("아이디와 비밀번호를 확인해주세요.");
           } else {
