@@ -5,7 +5,6 @@ import Show from "../views/show.vue";
 import Update from "../views/edit.vue";
 import Register from "../views/register.vue";
 import Login from "../views/login.vue";
-
 import TodoList from "../views/todoList.vue";
 
 Vue.use(VueRouter);

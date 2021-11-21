@@ -9,13 +9,11 @@ const auth = {
     setUserData(state, userData) {
       state.user = userData;
       console.log(userData);
-      localStorage.setItem("user", JSON.stringify(userData));
       axios.defaults.headers.common.Authorization = `Bearer ${userData.token}`;
     },
 
     clearUserData(state) {
       state.user = null;
-      localStorage.removeItem("user");
       location.reload();
     },
   },

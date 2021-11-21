@@ -5,6 +5,7 @@ Vue.use(Vuex);
 
 import Constant from "./modules/constant";
 import auth from "./modules/auth";
+import axios from "axios";
 
 const store = new Vuex.Store({
   modules: {
@@ -18,13 +19,24 @@ const store = new Vuex.Store({
     [Constant.ADD_TODO]: (state, payload) => {
       if (payload.todo !== "") {
         localStorage.setItem(
-          "todo",
           payload.todo,
           JSON.stringify({
             todo: payload.todo,
             done: false,
           })
         );
+
+        const form = new FormData();
+        form.append("todo", payload.todo);
+        form.append("user_id", auth.state.user.user.id);
+        axios
+          .post("/api/todo", form)
+          .then((res) => {
+            console.log(res.data);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
 
         state.todoList.push({
           todo: payload.todo,
@@ -51,6 +63,12 @@ const store = new Vuex.Store({
     [Constant.DELETE_TODO]: (state, payload) => {
       localStorage.removeItem(payload.todo);
       state.todoList.splice(payload.index, 1);
+      // axios
+      //   .delete("/api/todo")
+      //   .then(() => {})
+      //   .catch((err) => {
+      //     console.log(err);
+      //   });
     },
 
     [Constant.SHOW_LIST]: (state) => {
