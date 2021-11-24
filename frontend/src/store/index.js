@@ -26,22 +26,19 @@ const store = new Vuex.Store({
           })
         );
 
-        const form = new FormData();
-        form.append("todo", payload.todo);
-        form.append("user_id", auth.state.user.user.id);
-        axios
-          .post("/api/todo", form)
-          .then((res) => {
-            console.log(res.data);
-          })
-          .catch((err) => {
-            console.log(err);
-          });
-
         state.todoList.push({
           todo: payload.todo,
           done: false,
         });
+
+        axios
+          .post("/api/todoList")
+          .then((res) => {
+            console.log(res);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
       } else {
         alert("할 일을 입력해주세요!");
       }

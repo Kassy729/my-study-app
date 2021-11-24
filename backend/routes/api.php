@@ -49,4 +49,4 @@ Route::get('/user', [RegisterController::class, 'user']);
 
 //todo
 Route::post('/todo', [TodoListController::class, 'store']);
-Route::delete('/todo/{id}', [TodoListController::class, 'destroy']);
+Route::post('/todoList', [TodoListController::class], 'todo');

@@ -1,8 +1,8 @@
 <template>
   <div>
-    <!-- <div id="save-all" @click="saveAll">
+    <div id="save-all">
       <span>Save</span>
-    </div> -->
+    </div>
     <div id="clear-all" @click="clearAll">
       <span>Delete</span>
     </div>

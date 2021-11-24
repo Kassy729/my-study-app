@@ -91,7 +91,7 @@ export default {
       form.append("content", this.content);
       form.append("tag", this.tag);
       form.append("image", this.image);
-      form.append("user_id", this.$store.state.user.user.id);
+      form.append("user_id", this.$store.state.auth.user.user.id);
       axios
         .post("/api/store", form)
         .then((res) => {

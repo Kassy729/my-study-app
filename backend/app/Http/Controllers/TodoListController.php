@@ -9,17 +9,16 @@ class TodoListController extends Controller
 {
     public function store(Request $request)
     {
-        $todo = $request->todo;
         $user_id = $request->user_id;
 
-        $todoList = new Todo();
-        $todoList->todo = $todo;
-        $todoList->user_id = $user_id;
+        $todo = new Todo();
+        $todo->user_id = $user_id;
 
-        $todoList->save();
+        $todo->save();
+    }
 
-        $id = $todoList->id;
-
-        return $id;
+    public function todo(Request $request)
+    {
+        return 1;
     }
 }
