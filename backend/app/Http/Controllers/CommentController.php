@@ -14,7 +14,7 @@ class CommentController extends Controller
         $comment = Comment::create(
             [
                 'comment' => $request->comment,
-                'user_id' => "1",
+                'user_id' => $request->user_id,
                 'post_id' => $id
             ]
         );
@@ -23,9 +23,8 @@ class CommentController extends Controller
 
     public function index($id)
     {
-        // $comments = Comment::where('post_id', $id)->with('user')->get();
-        $comments = Comment::all();
-        // $comments = Comment::with('user')->where('post_id', $id)->latest()->get();
+        $comments = Comment::where('post_id', $id)->with('user')->get();
         return $comments;
+        // $comments = Comment::with('user')->where('post_id', $id)->latest()->get();
     }
 }

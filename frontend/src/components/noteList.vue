@@ -10,6 +10,33 @@
       integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
       crossorigin="anonymous"
     />
+    <form class="row gx-3 gy-2 align-items-center">
+      <div class="col-sm-7">
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Find a posts..."
+          aria-label="City"
+        />
+      </div>
+      <div class="col-sm-3">
+        <label class="visually-hidden" for="specificSizeSelect"
+          >Preference</label
+        >
+        <select class="form-select" id="specificSizeSelect">
+          <option selected>All</option>
+          <option value="1">Java</option>
+          <option value="2">JavaScript</option>
+          <option value="3">Laravel</option>
+          <option value="3">Vue</option>
+          <option value="3">React</option>
+          <option value="3">Android</option>
+        </select>
+      </div>
+      <div class="col-auto">
+        <button type="submit" class="btn btn-success">Search</button>
+      </div>
+    </form>
     <table class="table table-hover">
       <thead>
         <tr>

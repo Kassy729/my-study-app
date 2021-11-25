@@ -28,10 +28,12 @@ export default {
   data() {
     return {};
   },
+
   methods: {
     login() {
       this.$router.push({ path: "/login" });
     },
+
     logout() {
       this.$store.dispatch("auth/logout");
     },

@@ -39,7 +39,7 @@
 
                     <v-card-actions>
                       <v-spacer></v-spacer>
-                      <v-btn color="primary" text @click="onClick">
+                      <v-btn color="primary" text @click="dialog = false">
                         I accept
                       </v-btn>
                     </v-card-actions>
@@ -51,7 +51,6 @@
         </v-list-item-group>
       </v-list>
     </v-navigation-drawer>
-
     <div id="todo-app">
       <todo-input />
       <todo-list />
@@ -65,8 +64,6 @@
 import TodoInput from "./TodoInput";
 import TodoList from "./TodoList";
 import TodoClear from "./TodoClear";
-import axios from "axios";
-
 export default {
   name: "todo-app",
   data: () => ({
@@ -89,20 +86,6 @@ export default {
     onClickReturn() {
       this.$router.push({ path: "/" });
       location.reload();
-    },
-    onClick() {
-      this.dialog = false;
-
-      const form = new FormData();
-      form.append("user_id", this.$store.state.auth.user.user.id);
-      axios
-        .post("/api/todo", form)
-        .then((res) => {
-          console.log(res);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
     },
   },
 };

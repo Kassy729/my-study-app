@@ -39,11 +39,9 @@
         ></textarea>
       </div>
       <ul class="list-group list-group-flush">
-        <li class="list-group-item">사용언어 : {{ post.category }}</li>
+        <li class="list-group-item">카테고리 : {{ post.category }}</li>
         <li class="list-group-item">등록일 : {{ post.created_at }}</li>
-        <li class="list-group-item">
-          작성자 : {{ this.$store.state.auth.user.user.name }}
-        </li>
+        <li class="list-group-item">작성자 : {{ post.user.name }}</li>
       </ul>
 
       <div>
@@ -65,7 +63,7 @@
       </div>
       <div class="m-3">
         <comment-index :post="post" />
-        <comment-create :post="post" />
+        <!-- <comment-create :post="post" /> -->
       </div>
     </v-container>
   </div>
@@ -74,13 +72,11 @@
 <script>
 import axios from "axios";
 import MenuTable from "../components/menu.vue";
-import commentCreate from "../components/comment/commentCreate.vue";
 import CommentIndex from "../components/comment/commentIndex.vue";
 
 export default {
   components: {
     MenuTable,
-    commentCreate,
     CommentIndex,
   },
   data() {

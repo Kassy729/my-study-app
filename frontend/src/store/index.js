@@ -5,7 +5,6 @@ Vue.use(Vuex);
 
 import Constant from "./modules/constant";
 import auth from "./modules/auth";
-import axios from "axios";
 
 const store = new Vuex.Store({
   modules: {
@@ -30,15 +29,6 @@ const store = new Vuex.Store({
           todo: payload.todo,
           done: false,
         });
-
-        axios
-          .post("/api/todoList")
-          .then((res) => {
-            console.log(res);
-          })
-          .catch((err) => {
-            console.log(err);
-          });
       } else {
         alert("할 일을 입력해주세요!");
       }
