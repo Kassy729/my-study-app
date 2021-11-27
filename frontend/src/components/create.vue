@@ -38,7 +38,6 @@
         v-model="tag"
         :items="states"
         label="Select"
-        multiple
         chips
         hint="What are the target regions"
         persistent-hint
@@ -62,15 +61,7 @@ import axios from "axios";
 export default {
   data: () => ({
     tag: [],
-    states: [
-      "Java",
-      "JavaScript",
-      "Laravel",
-      "Vue.js",
-      "React",
-      "Android",
-      "Html",
-    ],
+    states: ["Java", "JavaScript", "Laravel", "Vue", "React", "Android"],
     valid: true,
     title: "",
 

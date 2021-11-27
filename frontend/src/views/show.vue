@@ -38,12 +38,19 @@
           placeholder="내용"
         ></textarea>
       </div>
+
       <ul class="list-group list-group-flush">
+        <!-- <p>좋아요 :</p> -->
+        <li class="list-group-item">
+          <v-row align="center">
+            <v-col cols="auto">즐겨찾기 : </v-col>
+            <v-col><like-button :post="post"/></v-col>
+          </v-row>
+        </li>
         <li class="list-group-item">카테고리 : {{ post.category }}</li>
         <li class="list-group-item">등록일 : {{ post.created_at }}</li>
         <li class="list-group-item">작성자 : {{ post.user.name }}</li>
       </ul>
-
       <div>
         <v-btn tile color="success" @click="onClickUpdate(post.id)">
           <v-icon left>
@@ -73,11 +80,13 @@
 import axios from "axios";
 import MenuTable from "../components/menu.vue";
 import CommentIndex from "../components/comment/commentIndex.vue";
+import LikeButton from "../components/LikeButton.vue";
 
 export default {
   components: {
     MenuTable,
     CommentIndex,
+    LikeButton,
   },
   data() {
     return {

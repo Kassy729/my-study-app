@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\LikesController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\RegisterController;
@@ -28,7 +29,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 
 //개발노트
-Route::post('/store', [PostController::class, 'store']);
+Route::post('/store', [PostController::class, 'store'])->middleware('auth:sanctum');
 Route::get('/main', [PostController::class, 'mainIndex']);
 Route::get('/index', [PostController::class, 'index']);
 Route::get('/show/{id}', [PostController::class, 'show']);
@@ -39,6 +40,7 @@ Route::delete('/{id}', [PostController::class, "destroy"]);
 //댓글
 Route::post('/comment/{id}', [CommentController::class, "store"]);
 Route::get('/comment/{id}', [CommentController::class, "index"]);
+Route::delete('/comment/{comment_id}', [CommentController::class, 'destroy']);
 
 
 //회원관리
@@ -47,6 +49,11 @@ Route::post('/login', [LoginController::class, 'authenticate']);
 Route::middleware('auth:sanctum')->post('/logout', [LoginController::class, 'logout']);
 Route::get('/user', [RegisterController::class, 'user']);
 
+
 //todo
 Route::post('/todo', [TodoListController::class, 'store']);
 Route::post('/todoList', [TodoListController::class], 'todo');
+
+
+//즐겨찾기
+Route::post('/like/{post}', [LikesController::class, 'store']);

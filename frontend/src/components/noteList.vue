@@ -37,22 +37,24 @@
         <button type="submit" class="btn btn-success">Search</button>
       </div>
     </form>
-    <table class="table table-hover">
-      <thead>
-        <tr>
-          <th scope="col">#</th>
-          <th scope="col">제목</th>
-          <th scope="col">카테고리</th>
-        </tr>
-      </thead>
-      <tbody v-for="post in posts.data" :key="post.id">
-        <tr>
-          <th scope="row">{{ post.id }}</th>
-          <td @click="onClickPost(post.id)">{{ post.title }}</td>
-          <td>{{ post.category }}</td>
-        </tr>
-      </tbody>
-    </table>
+    <br />
+    <hr />
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item" v-for="post in posts.data" :key="post.id">
+        <v-row>
+          <v-col cols="10">
+            <h4 @click="onClickPost(post.id)" style="color:#3F51B5">
+              {{ post.title }}
+            </h4>
+            <v-col>
+              <p>{{ post.category }}</p>
+            </v-col>
+          </v-col>
+          <v-col>즐겨찾기</v-col>
+        </v-row>
+      </li>
+    </ul>
+
     <div>
       <pagination
         @pageClicked="getPage"
@@ -66,6 +68,7 @@
 <script>
 import axios from "axios";
 import Pagination from "./Pagination.vue";
+// import LikeButton from "../components/LikeButton.vue";
 
 export default {
   components: { Pagination },
@@ -75,7 +78,7 @@ export default {
   }),
   mounted() {
     axios
-      .get(`/api/index`)
+      .get("/api/index")
       .then((res) => {
         this.posts = res.data;
       })

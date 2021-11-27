@@ -27,4 +27,11 @@ class CommentController extends Controller
         return $comments;
         // $comments = Comment::with('user')->where('post_id', $id)->latest()->get();
     }
+
+    public function destroy($comment_id)
+    {
+        $comment = Comment::find($comment_id);
+
+        return $comment->delete();
+    }
 }

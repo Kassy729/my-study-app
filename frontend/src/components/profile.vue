@@ -48,8 +48,8 @@ export default {
   mounted() {
     axios
       .get(`/api/user`)
-      .then((res) => {
-        console.log(res.data);
+      .then(() => {
+        // console.log(res.data);
       })
       .catch((err) => {
         console.log(err);

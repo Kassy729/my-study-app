@@ -7,7 +7,6 @@
           <tr>
             <th scope="col">내용</th>
             <th scope="col">작성자</th>
-            <th scope="col">수정</th>
             <th scope="col">삭제</th>
           </tr>
         </thead>
@@ -15,13 +14,9 @@
           <tr>
             <td>{{ comment.comment }}</td>
             <td>{{ comment.user.name }}</td>
+
             <td>
-              <button class="btn btn-warning" @click="onClickEdit">
-                수정
-              </button>
-            </td>
-            <td>
-              <button class="btn btn-danger" @click="onClickDelete">
+              <button class="btn btn-danger" @click="onClickDelete(comment.id)">
                 삭제
               </button>
             </td>
@@ -54,6 +49,7 @@ export default {
       comments: [],
     };
   },
+
   created() {
     this.getComment();
   },
@@ -84,8 +80,20 @@ export default {
           console.log(err);
         });
     },
-    onClickEdit() {},
-    onClickDelete() {},
+    onClickDelete(id) {
+      if (confirm("Are you sure to delete")) {
+        axios
+          .delete("/api/comment/" + id)
+          .then(() => {
+            // this.$emit("deleted");
+            // this.$parent.getComment();
+            this.getComment();
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      }
+    },
   },
 };
 </script>
