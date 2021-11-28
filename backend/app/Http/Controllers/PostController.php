@@ -10,6 +10,13 @@ use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
 {
+    public function mainIndex()
+    {
+        $posts = Post::all();
+        $posts = Post::orderby('created_at', 'desc')->limit(6)->paginate(6);
+        return $posts;
+    }
+
     public function store(Request $request)
     {
         $category = $request->tag;
@@ -37,6 +44,7 @@ class PostController extends Controller
     {
         $keyword = $request->keyword;
         $tag = $request->tag;
+
         if ($keyword || $tag) {
             if ($keyword && $tag) {
                 if ($tag == 'All') {
@@ -62,13 +70,6 @@ class PostController extends Controller
             $posts = Post::orderby('created_at', 'desc')->paginate(6);
             return $posts;
         }
-    }
-
-    public function mainIndex()
-    {
-        $posts = Post::all();
-        $posts = Post::orderby('created_at', 'desc')->limit(6);
-        return $posts;
     }
 
     public function show($id)

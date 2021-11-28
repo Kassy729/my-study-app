@@ -103,7 +103,6 @@ export default {
       axios
         .post("/api/index", form)
         .then((res) => {
-          console.log(res.data);
           this.posts = res.data;
         })
         .catch((err) => {

@@ -50,7 +50,7 @@ export default {
   },
   mounted() {
     axios
-      .get(`/api/index`)
+      .get("/api/main")
       .then((res) => {
         this.posts = res.data;
       })
