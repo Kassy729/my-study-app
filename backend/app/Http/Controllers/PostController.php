@@ -33,11 +33,35 @@ class PostController extends Controller
         $post->save();
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        $posts = Post::all();
-        $posts = Post::orderby('created_at', 'desc')->paginate(6);
-        return $posts;
+        $keyword = $request->keyword;
+        $tag = $request->tag;
+        if ($keyword || $tag) {
+            if ($keyword && $tag) {
+                if ($tag == 'All') {
+                    $posts = Post::where('title', 'like', '%' . $keyword . '%')->paginate(6);
+                    return $posts;
+                }
+                $posts = Post::where('title', 'like', '%' . $keyword . '%')->where('category', '=', $tag)->paginate(6);
+                return $posts;
+            } else if ($tag) {
+                if ($tag == 'All') {
+                    $posts = Post::all();
+                    $posts = Post::orderby('created_at', 'desc')->paginate(6);
+                    return $posts;
+                }
+                $posts = Post::where('category', '=', $tag)->paginate(6);
+                return $posts;
+            } else {
+                $posts = Post::where('title', 'like', '%' . $keyword . '%')->paginate(6);
+                return $posts;
+            }
+        } else {
+            $posts = Post::all();
+            $posts = Post::orderby('created_at', 'desc')->paginate(6);
+            return $posts;
+        }
     }
 
     public function mainIndex()

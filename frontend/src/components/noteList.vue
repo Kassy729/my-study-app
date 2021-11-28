@@ -10,11 +10,12 @@
       integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
       crossorigin="anonymous"
     />
-    <form class="row gx-3 gy-2 align-items-center">
+    <form class="row gx-3 gy-2 align-items-center" @submit.prevent="getPosts">
       <div class="col-sm-7">
         <input
           type="text"
           class="form-control"
+          v-model="keyword"
           placeholder="Find a posts..."
           aria-label="City"
         />
@@ -23,14 +24,14 @@
         <label class="visually-hidden" for="specificSizeSelect"
           >Preference</label
         >
-        <select class="form-select" id="specificSizeSelect">
+        <select class="form-select" id="specificSizeSelect" v-model="tag">
           <option selected>All</option>
-          <option value="1">Java</option>
-          <option value="2">JavaScript</option>
-          <option value="3">Laravel</option>
-          <option value="3">Vue</option>
-          <option value="3">React</option>
-          <option value="3">Android</option>
+          <option value="Java">Java</option>
+          <option value="JavaScript">JavaScript</option>
+          <option value="Laravel">Laravel</option>
+          <option value="Vue">Vue</option>
+          <option value="React">React</option>
+          <option value="Android">Android</option>
         </select>
       </div>
       <div class="col-auto">
@@ -75,16 +76,11 @@ export default {
   data: () => ({
     reveal: false,
     posts: [],
+    keyword: "",
+    tag: "",
   }),
   mounted() {
-    axios
-      .get("/api/index")
-      .then((res) => {
-        this.posts = res.data;
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    this.getPosts();
   },
   methods: {
     onClickPost(id) {
@@ -100,6 +96,35 @@ export default {
           console.log(err);
         });
     },
+    getPosts() {
+      const form = new FormData();
+      form.append("keyword", this.keyword);
+      form.append("tag", this.tag);
+      axios
+        .post("/api/index", form)
+        .then((res) => {
+          console.log(res.data);
+          this.posts = res.data;
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+    // onClickSearch() {
+    //   const form = new FormData();
+    //   form.append("keyword", this.keyword);
+    //   axios
+    //     .post("/api/search", form)
+    //     .then((res) => {
+    //       console.log(res.data);
+    //       this.posts = res.data;
+    //       console.log(this.posts);
+    //       this.getPosts();
+    //     })
+    //     .catch((err) => {
+    //       console.log(err);
+    //     });
+    // },
   },
 };
 </script>

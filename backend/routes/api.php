@@ -31,10 +31,11 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 //개발노트
 Route::post('/store', [PostController::class, 'store'])->middleware('auth:sanctum');
 Route::get('/main', [PostController::class, 'mainIndex']);
-Route::get('/index', [PostController::class, 'index']);
+Route::post('/index', [PostController::class, 'index']);
 Route::get('/show/{id}', [PostController::class, 'show']);
 Route::post('/update/{id}', [PostController::class, "update"]);
 Route::delete('/{id}', [PostController::class, "destroy"]);
+
 
 
 //댓글
