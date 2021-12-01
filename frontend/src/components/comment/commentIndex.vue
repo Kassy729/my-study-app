@@ -74,7 +74,6 @@ export default {
         .get("/api/comment/" + this.post.id)
         .then((res) => {
           this.comments = res.data;
-          console.log(this.comments);
         })
         .catch((err) => {
           console.log(err);

@@ -3,6 +3,28 @@
     <v-container>
       <h1 class="title">회원가입</h1>
       <br />
+      <span>ProfileImage</span>
+      <v-file-input
+        accept="image/png, image/jpeg, image/bmp"
+        enctype="multipart/form-data"
+        placeholder="Pick an avatar"
+        prepend-icon="mdi-camera"
+        label="File input"
+        @change="selectFile"
+      ></v-file-input>
+      <template v-slot:selection="{ index, text }">
+        <v-chip v-if="index < 2" color="deep-purple accent-4" dark label small>
+          {{ text }}
+        </v-chip>
+
+        <span
+          v-else-if="index === 2"
+          class="text-overline grey--text text--darken-3 mx-2"
+        >
+          +{{ files.length - 2 }} File(s)
+        </span>
+      </template>
+
       <span>이름</span>
       <v-text-field
         v-model="name"
@@ -101,16 +123,18 @@ export default {
       } else {
         this.password_confirmation = true;
       }
+
+      const form = new FormData();
+      form.append("image", this.image);
+      form.append("email", this.email);
+      form.append("name", this.name);
+      form.append("password", this.password);
+      form.append("password_confirmation", this.password_confirmation);
       axios
-        .post("/api/register", {
-          email: this.email,
-          name: this.name,
-          password: this.password,
-          password_confirmation: this.password_confirmation,
-        })
+        .post("/api/register", form)
         .then((res) => {
-          console.log(res.status);
-          this.$router.push("/login");
+          console.log(res.data);
+          // this.$router.push("/login");
         })
         .catch((err) => {
           console.log("가입이 안됐어용ㅠ");
@@ -120,6 +144,9 @@ export default {
             alert("사용 불가능한 이메일 입니다. 이메일을 다시 입력해주세요.");
           this.email = "";
         });
+    },
+    selectFile(file) {
+      this.image = file;
     },
   },
 };

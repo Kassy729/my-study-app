@@ -67,7 +67,7 @@ class PostController extends Controller
             }
         } else {
             $posts = Post::all();
-            $posts = Post::orderby('created_at', 'desc')->paginate(6);
+            $posts = Post::orderby('created_at', 'desc')->latest()->paginate(6);
             return $posts;
         }
     }

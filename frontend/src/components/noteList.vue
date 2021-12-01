@@ -69,7 +69,6 @@
 <script>
 import axios from "axios";
 import Pagination from "./Pagination.vue";
-// import LikeButton from "../components/LikeButton.vue";
 
 export default {
   components: { Pagination },
@@ -79,16 +78,18 @@ export default {
     keyword: "",
     tag: "",
   }),
+
   mounted() {
     this.getPosts();
   },
+
   methods: {
     onClickPost(id) {
       this.$router.push({ path: "/show/" + id });
     },
     getPage(url) {
       axios
-        .get(url)
+        .post(url)
         .then((res) => {
           this.posts = res.data;
         })
@@ -109,21 +110,6 @@ export default {
           console.log(err);
         });
     },
-    // onClickSearch() {
-    //   const form = new FormData();
-    //   form.append("keyword", this.keyword);
-    //   axios
-    //     .post("/api/search", form)
-    //     .then((res) => {
-    //       console.log(res.data);
-    //       this.posts = res.data;
-    //       console.log(this.posts);
-    //       this.getPosts();
-    //     })
-    //     .catch((err) => {
-    //       console.log(err);
-    //     });
-    // },
   },
 };
 </script>

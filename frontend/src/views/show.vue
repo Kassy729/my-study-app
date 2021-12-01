@@ -91,6 +91,9 @@ export default {
   data() {
     return {
       post: [],
+      test: "test",
+      // name: this.post.user.name,
+      // name: this.post.user.name,
       //   imagePath: "http://localhost:8000/storage/images/",
       //   image: this.post.image,
     };
@@ -106,13 +109,6 @@ export default {
       });
   },
   methods: {
-    // imageTest(img) {
-    //   if (!img) {
-    //     return "noimage.jpg";
-    //   } else {
-    //     return img;
-    //   }
-    // },
     onClickUpdate(id) {
       this.$router.push({ path: "/update/" + id });
     },

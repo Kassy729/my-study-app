@@ -53,8 +53,7 @@ export default {
       form.append("user", this.$store.state.auth.user.user.id);
       axios
         .post(`/api/like/${this.post.id}`, form)
-        .then((res) => {
-          console.log(res.data);
+        .then(() => {
           this.like = !this.like;
         })
         .catch((err) => {
@@ -68,7 +67,6 @@ export default {
     },
   },
   created() {
-    console.log(this.post.likes);
     this.userIdArray = this.post.likes.map((elem) => {
       return elem.id;
     });

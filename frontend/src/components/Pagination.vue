@@ -2,13 +2,13 @@
   <div v-if="links.length > 3">
     <div class="flex flex-wrap -mb-1">
       <template v-for="(link, key) in links">
-        <div
+        <button
           v-if="link.url === null"
           :key="key"
           class="px-4 py-3 mb-1 mr-1 text-sm leading-4 text-gray-400 border rounded"
           v-html="link.label"
         />
-        <div
+        <button
           v-else
           :key="key"
           class="px-4 py-3 mb-1 mr-1 text-sm leading-4 border rounded bg-white-500 hover:bg-blue-600 focus:border-indigo-400 font-bold focus:text-indigo-500"

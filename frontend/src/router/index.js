@@ -6,6 +6,7 @@ import Update from "../views/edit.vue";
 import Register from "../views/register.vue";
 import Login from "../views/login.vue";
 import TodoList from "../views/todoList.vue";
+import editProfile from "../views/editProfile.vue";
 
 Vue.use(VueRouter);
 
@@ -39,6 +40,11 @@ const routes = [
     path: "/login",
     name: "Login",
     component: Login,
+  },
+  {
+    path: "/editProfile",
+    name: "editProfile",
+    component: editProfile,
   },
 ];
 

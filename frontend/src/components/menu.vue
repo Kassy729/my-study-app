@@ -7,6 +7,10 @@
       >
       <v-spacer></v-spacer>
 
+      <p v-if="!this.$store.state.auth.user == null">
+        로그인 되어 있음
+      </p>
+
       <v-btn
         class="ma-2"
         outlined

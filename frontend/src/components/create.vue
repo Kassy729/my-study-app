@@ -87,7 +87,7 @@ export default {
         .post("/api/store", form)
         .then((res) => {
           console.log(res.data);
-          window.location.href = "http://localhost:8080";
+          // window.location.href = "http://localhost:8080";
         })
         .catch((err) => {
           console.log(err);

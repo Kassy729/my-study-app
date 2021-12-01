@@ -33,8 +33,10 @@ Route::get('/main', [PostController::class, 'mainIndex']);
 Route::post('/store', [PostController::class, 'store'])->middleware('auth:sanctum');
 Route::post('/index', [PostController::class, 'index']);
 Route::get('/show/{id}', [PostController::class, 'show']);
-Route::post('/update/{id}', [PostController::class, "update"]);
-Route::delete('/{id}', [PostController::class, "destroy"]);
+Route::post('/update/{id}', [PostController::class, "update"])->middleware('auth:sanctum');
+Route::delete('/{id}', [PostController::class, "destroy"])
+    ->middleware('auth:sanctum');
+// 저기.. 아까부터 지켜봤는데.. 너무 맘에 들어서 번호좀.. 주실 수 있나요? 제 이상형 이십니다 . . .
 
 
 
@@ -49,6 +51,8 @@ Route::post('/register', [RegisterController::class, 'store']);
 Route::post('/login', [LoginController::class, 'authenticate']);
 Route::middleware('auth:sanctum')->post('/logout', [LoginController::class, 'logout']);
 Route::get('/user', [RegisterController::class, 'user']);
+Route::post('/getProfile', [RegisterController::class, 'profile']);
+Route::post('/name', [RegisterController::class, 'name']);
 
 
 //todo
