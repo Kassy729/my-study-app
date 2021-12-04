@@ -50,9 +50,10 @@ Route::delete('/comment/{comment_id}', [CommentController::class, 'destroy']);
 Route::post('/register', [RegisterController::class, 'store']);
 Route::post('/login', [LoginController::class, 'authenticate']);
 Route::middleware('auth:sanctum')->post('/logout', [LoginController::class, 'logout']);
-Route::get('/user', [RegisterController::class, 'user']);
+Route::post('/user', [RegisterController::class, 'user']);
 Route::post('/getProfile', [RegisterController::class, 'profile']);
 Route::post('/name', [RegisterController::class, 'name']);
+Route::post('/editProfile', [RegisterController::class, 'edit']);
 
 
 //todo

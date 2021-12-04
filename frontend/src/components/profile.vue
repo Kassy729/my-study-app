@@ -22,14 +22,58 @@
     </v-row>
 
     <v-row v-else>
-      <h1>{{ userName }}</h1>
+      <h1>{{ user.name }}</h1>
     </v-row>
 
     <v-row>
-      <v-btn class="ma-2" outlined color="black" @click="edit">
+      <v-btn class="ma-2" outlined color="black" @click="edit = true">
         Edit Profile
       </v-btn>
     </v-row>
+    <v-container v-if="edit">
+      <!-- <v-row>
+        <v-col><component v-bind:is="selectedComponent"> </component> </v-col>
+      </v-row> -->
+      <div>
+        <v-row>
+          <v-col>
+            <v-form ref="form" @submit.prevent="onsubmitForm">
+              <label for="exampleFormControlInput1" class="form-label"
+                >ProfileImage</label
+              >
+              <v-file-input
+                accept="image/png, image/jpeg, image/bmp"
+                enctype="multipart/form-data"
+                prepend-icon="mdi-camera"
+                label="File input"
+                @change="selectFile"
+              ></v-file-input>
+              <div>
+                <label for="exampleFormControlInput1" class="form-label"
+                  >Name</label
+                >
+                <div class="mb-3">
+                  <input
+                    type="text"
+                    v-model="name"
+                    class="form-control"
+                    id="exampleFormControlInput1"
+                  />
+                </div>
+              </div>
+              <button type="submit" class="btn btn-success mr-3">Save</button>
+              <button
+                type="button"
+                class="btn btn-secondary"
+                @click="edit = false"
+              >
+                Cancel
+              </button>
+            </v-form>
+          </v-col>
+        </v-row>
+      </div>
+    </v-container>
 
     <v-row>
       <p><v-icon large color="black"> mdi-account-multiple </v-icon>follower</p>
@@ -48,8 +92,12 @@ export default {
   data() {
     return {
       user: [],
+      selectedComponent: "",
+      name: "",
+      edit: false,
     };
   },
+
   computed: {
     userName() {
       return this.$store.state.auth.user.user.name;
@@ -77,8 +125,25 @@ export default {
           console.log(err);
         });
     },
-    edit() {
-      this.$router.push({ path: "/editProfile" });
+
+    onsubmitForm() {
+      const form = new FormData();
+      form.append("userId", this.userId);
+      form.append("name", this.name);
+      form.append("image", this.image);
+      axios
+        .post("/api/editProfile", form)
+        .then(() => {
+          this.getProfileImage();
+          this.edit = false;
+        })
+        .catch((err) => {
+          console.log(err);
+          alert("실패");
+        });
+    },
+    selectFile(file) {
+      this.image = file;
     },
   },
 };

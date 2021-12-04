@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 
 class RegisterController extends Controller
 {
@@ -46,8 +47,30 @@ class RegisterController extends Controller
     }
 
 
-    public function name(Request $request)
+    public function user(Request $request)
     {
+        $id = $request->userId;
+        $user = User::find($id);
+        return $user;
+    }
+
+    public function edit(Request $request)
+    {
+        $userId = $request->userId;
+        $user = User::find($userId);
+
+        $user->name = $request->name;
+
+        if ($request->image) {
+            if ($user->image) {
+                Storage::delete('public/images/' . $user->image);
+            }
+            $fileName = time() . '_' . $request->file('image')->getClientOriginalName();
+            $user->image = $fileName;
+            $request->image->storeAs('public/images/', $fileName);
+        }
+
+        $user->save();
 
         return $request;
     }

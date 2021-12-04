@@ -113,15 +113,17 @@ export default {
       this.$router.push({ path: "/update/" + id });
     },
     onClickDelete() {
-      axios
-        .delete("http://localhost:8000/api/" + this.$route.params.postId)
-        .then(() => {
-          window.location.href = "http://localhost:8080";
-        })
-        .catch((err) => {
-          console.log(err);
-          alert("실패");
-        });
+      if (confirm("Are you sure to delete")) {
+        axios
+          .delete("http://localhost:8000/api/" + this.$route.params.postId)
+          .then(() => {
+            window.location.href = "http://localhost:8080";
+          })
+          .catch((err) => {
+            console.log(err);
+            alert("실패");
+          });
+      }
     },
   },
 };

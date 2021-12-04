@@ -7,9 +7,11 @@
       >
       <v-spacer></v-spacer>
 
-      <p v-if="!this.$store.state.auth.user == null">
-        로그인 되어 있음
-      </p>
+      <div color="white" v-if="this.users == null">
+        비로그인
+      </div>
+
+      <div v-else>{{ this.users.name }}님 환영합니다</div>
 
       <v-btn
         class="ma-2"
@@ -28,9 +30,22 @@
 </template>
 
 <script>
+import axios from "axios";
+// import axios from "axios";
+
 export default {
   data() {
-    return {};
+    return {
+      users: [],
+    };
+  },
+  mounted() {
+    this.user();
+  },
+  computed: {
+    userId() {
+      return this.$store.state.auth.user.user.id;
+    },
   },
 
   methods: {
@@ -40,6 +55,19 @@ export default {
 
     logout() {
       this.$store.dispatch("auth/logout");
+    },
+
+    user() {
+      const form = new FormData();
+      form.append("userId", this.userId);
+      axios
+        .post("/api/user", form)
+        .then((res) => {
+          this.users = res.data;
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     },
   },
 };

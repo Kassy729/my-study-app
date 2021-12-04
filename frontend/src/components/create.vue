@@ -21,7 +21,6 @@
         label="Title"
         value="My new post"
         v-model="title"
-        :counter="10"
         required
       ></v-text-field>
 
@@ -85,9 +84,8 @@ export default {
       form.append("user_id", this.$store.state.auth.user.user.id);
       axios
         .post("/api/store", form)
-        .then((res) => {
-          console.log(res.data);
-          // window.location.href = "http://localhost:8080";
+        .then(() => {
+          window.location.href = "http://localhost:8080";
         })
         .catch((err) => {
           console.log(err);
