@@ -36,7 +36,6 @@ Route::get('/show/{id}', [PostController::class, 'show']);
 Route::post('/update/{id}', [PostController::class, "update"])->middleware('auth:sanctum');
 Route::delete('/{id}', [PostController::class, "destroy"])
     ->middleware('auth:sanctum');
-// 저기.. 아까부터 지켜봤는데.. 너무 맘에 들어서 번호좀.. 주실 수 있나요? 제 이상형 이십니다 . . .
 
 
 

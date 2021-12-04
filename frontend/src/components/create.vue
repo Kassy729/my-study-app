@@ -41,6 +41,10 @@
         hint="What are the target regions"
         persistent-hint
       ></v-select>
+      <v-radio-group v-model="type" row>
+        <v-radio label="Public" value="Public"></v-radio>
+        <v-radio label="Private" value="Private"></v-radio>
+      </v-radio-group>
     </v-card-text>
 
     <v-divider></v-divider>
@@ -59,11 +63,11 @@ import axios from "axios";
 
 export default {
   data: () => ({
-    tag: [],
+    tag: "",
+    type: "",
     states: ["Java", "JavaScript", "Laravel", "Vue", "React", "Android"],
     valid: true,
     title: "",
-
     content: "",
 
     rules: [
@@ -82,6 +86,7 @@ export default {
       form.append("tag", this.tag);
       form.append("image", this.image);
       form.append("user_id", this.$store.state.auth.user.user.id);
+      form.append("type", this.type);
       axios
         .post("/api/store", form)
         .then(() => {

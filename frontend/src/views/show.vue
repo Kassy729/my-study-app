@@ -91,11 +91,6 @@ export default {
   data() {
     return {
       post: [],
-      test: "test",
-      // name: this.post.user.name,
-      // name: this.post.user.name,
-      //   imagePath: "http://localhost:8000/storage/images/",
-      //   image: this.post.image,
     };
   },
   mounted() {

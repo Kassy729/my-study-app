@@ -23,12 +23,14 @@ class PostController extends Controller
         $title = $request->title;
         $content = $request->content;
         $user_id = $request->user_id;
+        $type = $request->type;
 
         $post = new Post();
         $post->category = $category;
         $post->title = $title;
         $post->content = $content;
         $post->user_id = $user_id;
+        $post->type = $type;
 
         $fileName = null;
         if ($request->hasFile('image')) {
@@ -44,6 +46,7 @@ class PostController extends Controller
     {
         $keyword = $request->keyword;
         $tag = $request->tag;
+        $type = $request->type;
 
         if ($keyword || $tag) {
             if ($keyword && $tag) {
@@ -91,6 +94,7 @@ class PostController extends Controller
         $post = Post::find($id);
         $post->title = $request->title;
         $post->content = $request->content;
+        $post->type = $request->type;
 
         // return $request;
 

@@ -51,6 +51,10 @@
           <li class="list-group-item">등록일 : {{ post.created_at }}</li>
           <!-- <li class="list-group-item">작성자 : {{ post.user.name }}</li> -->
         </ul>
+        <v-radio-group v-model="type" row>
+          <v-radio label="Public" value="Public"></v-radio>
+          <v-radio label="Private" value="Private"></v-radio>
+        </v-radio-group>
 
         <v-row align="center" justify="space-around">
           <v-btn tile color="success" class="m-2" type="submit">
@@ -79,6 +83,7 @@ export default {
     return {
       post: [],
       image: "",
+      type: "",
     };
   },
   mounted() {
@@ -98,6 +103,7 @@ export default {
       form.append("title", this.post.title);
       form.append("content", this.post.content);
       form.append("image", this.image);
+      form.append("type", this.type);
       axios
         .post("/api/update/" + this.$route.params.postId, form)
         .then(() => {

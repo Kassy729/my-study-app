@@ -19,7 +19,8 @@
           <v-list-item-content>
             <v-list-item-title
               @click="onClickPost(post.id)"
-              class="text-h5 mb-1 "
+              class="text-h7 mb-4 bold"
+              style="color:#3F51B5"
             >
               {{ post.title }}
             </v-list-item-title>
