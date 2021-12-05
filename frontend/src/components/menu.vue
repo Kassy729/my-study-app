@@ -7,8 +7,8 @@
       >
       <v-spacer></v-spacer>
 
-      <div color="white" v-if="this.users == null">
-        비로그인
+      <div color="white" v-if="this.users.name == null">
+        로그인 해주세요
       </div>
 
       <div v-else>{{ this.users.name }}님 환영합니다</div>
@@ -20,7 +20,7 @@
         @click="login"
         v-if="this.$store.state.auth.user == null"
       >
-        Sign up
+        Sign ip
       </v-btn>
       <v-btn class="ma-2" outlined color="white" @click="logout" v-else>
         Logout

@@ -22,7 +22,7 @@
     </v-row>
 
     <v-row v-else>
-      <h1>{{ user.name }}</h1>
+      <h4 style="color:#2c2c2c">{{ user.name }}</h4>
     </v-row>
 
     <v-row>

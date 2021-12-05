@@ -19,7 +19,7 @@
           <v-list-item-content>
             <v-list-item-title
               @click="onClickPost(post.id)"
-              class="text-h7 mb-4 bold"
+              class="text-h7 mb-4 font-weight: $bold"
               style="color:#3F51B5"
             >
               {{ post.title }}
