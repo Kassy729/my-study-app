@@ -61,7 +61,7 @@ export default {
       const form = new FormData();
       form.append("userId", this.userId);
       axios
-        .post("http://18.181.162.146:8000/api/user", form)
+        .post("http://35.76.24.183:8000/api/user", form)
         .then((res) => {
           this.users = res.data;
         })

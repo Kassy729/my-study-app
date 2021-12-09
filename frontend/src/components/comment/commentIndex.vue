@@ -60,7 +60,7 @@ export default {
       form.append("comment", this.comment);
       form.append("user_id", this.$store.state.auth.user.user.id);
       axios
-        .post("/api/comment/" + this.post.id, form)
+        .post("http://35.76.24.183/api/comment/" + this.post.id, form)
         .then(() => {
           this.comment = "";
           this.getComment();
@@ -71,7 +71,7 @@ export default {
     },
     getComment() {
       axios
-        .get("/api/comment/" + this.post.id)
+        .get("http://35.76.24.183/api/comment/" + this.post.id)
         .then((res) => {
           this.comments = res.data;
         })
@@ -82,7 +82,7 @@ export default {
     onClickDelete(id) {
       if (confirm("Are you sure to delete")) {
         axios
-          .delete("/api/comment/" + id)
+          .delete("http://35.76.24.183/api/comment/" + id)
           .then(() => {
             // this.$emit("deleted");
             // this.$parent.getComment();

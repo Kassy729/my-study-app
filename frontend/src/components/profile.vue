@@ -13,7 +13,7 @@
         class="profileImg"
         max-height="270"
         max-width="270"
-        :src="`http://18.181.162.146:8000/storage/images/${user.image}`"
+        :src="`http://35.76.24.183/:8000/storage/images/${user.image}`"
       ></v-img>
     </v-row>
 
@@ -110,7 +110,7 @@ export default {
       const form = new FormData();
       form.append("userId", this.userId);
       axios
-        .post("http://18.181.162.146:8000/api/getProfile", form)
+        .post("http://35.76.24.183:8000/api/getProfile", form)
         .then((res) => {
           this.user = res.data;
         })
@@ -124,7 +124,7 @@ export default {
       form.append("userId", this.userId);
       form.append("image", this.image);
       axios
-        .post("http://18.181.162.146:8000/api/editProfile", form)
+        .post("http://35.76.24.183:8000/api/editProfile", form)
         .then((res) => {
           console.log(res.data);
           this.getProfileImage();

@@ -131,7 +131,7 @@ export default {
       form.append("password", this.password);
       form.append("password_confirmation", this.password_confirmation);
       axios
-        .post("http://18.181.162.146:8000/api/register", form)
+        .post("http://35.76.24.183:8000/api/register", form)
         .then(() => {
           // console.log(res.data);
           this.$router.push("/login");

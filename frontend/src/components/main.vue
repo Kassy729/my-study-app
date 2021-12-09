@@ -52,7 +52,7 @@ export default {
   mounted() {
     console.log("/api/main");
     axios
-      .get("http://18.181.162.146:8000/api/main")
+      .get("http://35.76.24.183:8000/api/main")
       .then((res) => {
         console.log("t");
         console.log(res.data);

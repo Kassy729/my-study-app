@@ -11,7 +11,7 @@
       <v-form ref="form" @submit.prevent="onEditForm">
         <v-img
           v-if="post.image"
-          :src="`http://localhost:8000/storage/images/${post.image}`"
+          :src="`http://35.76.24.183:8000/storage/images/${post.image}`"
           style="width: 40rem;"
           class="card-img-top"
           alt="my post image"
@@ -88,7 +88,7 @@ export default {
   },
   mounted() {
     axios
-      .get("http://18.181.162.146:8000/api/show/" + this.$route.params.postId)
+      .get("http://35.76.24.183:8000/api/show/" + this.$route.params.postId)
       .then((res) => {
         console.log(res.data);
         this.post = res.data;
@@ -106,7 +106,7 @@ export default {
       form.append("type", this.type);
       axios
         .post(
-          "http://18.181.162.146:8000/api/update/" + this.$route.params.postId,
+          "http://35.76.24.183:8000/api/update/" + this.$route.params.postId,
           form
         )
         .then(() => {

@@ -10,7 +10,7 @@
     <v-container>
       <v-img
         v-if="post.image"
-        :src="`http://18.181.162.146:8000/storage/images/${post.image}`"
+        :src="`http://35.76.24.183:8000/storage/images/${post.image}`"
         style="width: 40rem;"
         class="card-img-top"
         alt="my post image"
@@ -95,7 +95,7 @@ export default {
   },
   mounted() {
     axios
-      .get("/api/show/" + this.$route.params.postId)
+      .get("http://35.76.24.183:8000/api/show/" + this.$route.params.postId)
       .then((res) => {
         this.post = res.data;
       })
@@ -110,7 +110,7 @@ export default {
     onClickDelete() {
       if (confirm("Are you sure to delete")) {
         axios
-          .delete("http://18.181.162.146:8000/api/" + this.$route.params.postId)
+          .delete("http://35.76.24.183:8000/api/" + this.$route.params.postId)
           .then(() => {
             this.$router.push({ path: "/" });
           })
