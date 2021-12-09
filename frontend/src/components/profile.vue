@@ -25,7 +25,9 @@
       <h4 style="color:#2c2c2c">{{ user.name }}</h4>
     </v-row>
 
-    <v-row>
+    <v-row v-if="this.$store.state.auth.user == null"> </v-row>
+
+    <v-row v-else>
       <v-btn class="ma-2" outlined color="black" @click="edit = true">
         Edit Profile
       </v-btn>
