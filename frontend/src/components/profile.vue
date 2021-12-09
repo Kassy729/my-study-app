@@ -5,7 +5,7 @@
         class="profileImg"
         max-height="270"
         max-width="270"
-        :src="`http://localhost:8000/storage/images/baseicon.png`"
+        :src="`http://placehold.it/150x150`"
       ></v-img>
     </v-row>
     <v-row v-else>
@@ -13,7 +13,7 @@
         class="profileImg"
         max-height="270"
         max-width="270"
-        :src="`http://localhost:8000/storage/images/${user.image}`"
+        :src="`http://18.181.162.146:8000/storage/images/${user.image}`"
       ></v-img>
     </v-row>
 
@@ -22,6 +22,7 @@
     </v-row>
 
     <v-row v-else>
+      <!-- <h4 style="color:#2c2c2c">{{ user.name }}</h4> -->
       <h4 style="color:#2c2c2c">{{ user.name }}</h4>
     </v-row>
 
@@ -50,19 +51,7 @@
                 label="File input"
                 @change="selectFile"
               ></v-file-input>
-              <div>
-                <label for="exampleFormControlInput1" class="form-label"
-                  >Name</label
-                >
-                <div class="mb-3">
-                  <input
-                    type="text"
-                    v-model="name"
-                    class="form-control"
-                    id="exampleFormControlInput1"
-                  />
-                </div>
-              </div>
+
               <button type="submit" class="btn btn-success mr-3">Save</button>
               <button
                 type="button"
@@ -110,6 +99,8 @@ export default {
   },
   mounted() {
     this.getProfileImage();
+    console.log(this.user.name);
+    console.log("tttt");
   },
   methods: {
     getProfileImage() {
@@ -119,7 +110,7 @@ export default {
       const form = new FormData();
       form.append("userId", this.userId);
       axios
-        .post("/api/getProfile", form)
+        .post("http://18.181.162.146:8000/api/getProfile", form)
         .then((res) => {
           this.user = res.data;
         })
@@ -131,11 +122,11 @@ export default {
     onsubmitForm() {
       const form = new FormData();
       form.append("userId", this.userId);
-      form.append("name", this.name);
       form.append("image", this.image);
       axios
-        .post("/api/editProfile", form)
-        .then(() => {
+        .post("http://18.181.162.146:8000/api/editProfile", form)
+        .then((res) => {
+          console.log(res.data);
           this.getProfileImage();
           this.edit = false;
         })

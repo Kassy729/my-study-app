@@ -131,10 +131,10 @@ export default {
       form.append("password", this.password);
       form.append("password_confirmation", this.password_confirmation);
       axios
-        .post("/api/register", form)
-        .then((res) => {
-          console.log(res.data);
-          // this.$router.push("/login");
+        .post("http://18.181.162.146:8000/api/register", form)
+        .then(() => {
+          // console.log(res.data);
+          this.$router.push("/login");
         })
         .catch((err) => {
           console.log("가입이 안됐어용ㅠ");

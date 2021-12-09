@@ -40,6 +40,7 @@ class RegisterController extends Controller
 
     public function profile(Request $request)
     {
+        return $request;
         $id = $request->userId;
         $user = User::find($id);
 
@@ -58,10 +59,6 @@ class RegisterController extends Controller
     {
         $userId = $request->userId;
         $user = User::find($userId);
-
-        if ($request->user) {
-            $user->name = $request->name;
-        }
 
         if ($request->image) {
             if ($user->image) {

@@ -21,10 +21,15 @@ const auth = {
   actions: {
     async login({ commit }, credentials) {
       try {
-        const response = await axios.get("/sanctum/csrf-cookie");
+        // const response = await axios.get(
+        //   "http://18.181.162.146:8000/sanctum/csrf-cookie"
+        // );
 
-        console.log(response.status);
-        const { data } = await axios.post("/api/login", credentials);
+        // console.log(response.status);
+        const { data } = await axios.post(
+          "http://18.181.162.146:8000/api/login",
+          credentials
+        );
 
         commit("setUserData", data);
       } catch (err) {
@@ -32,7 +37,7 @@ const auth = {
       }
     },
     logout({ commit }) {
-      axios.post("/api/logout").then((res) => {
+      axios.post("http://18.181.162.146:8000/api/logout").then((res) => {
         console.log(res.data);
       });
       commit("clearUserData");

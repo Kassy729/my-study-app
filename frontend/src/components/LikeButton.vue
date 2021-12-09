@@ -52,7 +52,7 @@ export default {
       const form = new FormData();
       form.append("user", this.$store.state.auth.user.user.id);
       axios
-        .post(`/api/like/${this.post.id}`, form)
+        .post(`http://18.181.162.146:8000/api/like/${this.post.id}`, form)
         .then(() => {
           this.like = !this.like;
         })

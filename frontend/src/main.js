@@ -7,7 +7,7 @@ import vuetify from "./plugins/vuetify";
 import axios from "axios";
 
 Vue.config.productionTip = false;
-axios.defaults.baseURL = "http://18.181.162.146:8000";
+axios.defaults.baseURL = "http://18.181.162.146:8000/";
 
 axios.defaults.withCredentials = true;
 //쿠기 보내려면 이것 트로

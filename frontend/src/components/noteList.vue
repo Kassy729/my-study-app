@@ -118,7 +118,7 @@ export default {
       form.append("tag", this.tag);
       // form.append("type", this.type);
       axios
-        .post("/api/index", form)
+        .post("http://18.181.162.146:8000/api/index", form)
         .then((res) => {
           this.posts = res.data;
         })

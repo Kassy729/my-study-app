@@ -88,7 +88,7 @@ export default {
       form.append("user_id", this.$store.state.auth.user.user.id);
       form.append("type", this.type);
       axios
-        .post("/api/store", form)
+        .post("http://18.181.162.146:8000/api/store", form)
         .then(() => {
           window.location.href = "http://localhost:8080";
         })

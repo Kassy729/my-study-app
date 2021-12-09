@@ -10,7 +10,7 @@
     <v-container>
       <v-img
         v-if="post.image"
-        :src="`http://localhost:8000/storage/images/${post.image}`"
+        :src="`http://18.181.162.146:8000/storage/images/${post.image}`"
         style="width: 40rem;"
         class="card-img-top"
         alt="my post image"
@@ -110,9 +110,9 @@ export default {
     onClickDelete() {
       if (confirm("Are you sure to delete")) {
         axios
-          .delete("http://localhost:8000/api/" + this.$route.params.postId)
+          .delete("http://18.181.162.146:8000/api/" + this.$route.params.postId)
           .then(() => {
-            window.location.href = "http://localhost:8080";
+            this.$router.push({ path: "/" });
           })
           .catch((err) => {
             console.log(err);

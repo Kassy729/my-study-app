@@ -116,6 +116,7 @@ class PostController extends Controller
 
     public function destroy($id)
     {
+        return 1;
         $post = Post::findOrFail($id);
 
         if ($post->image) {

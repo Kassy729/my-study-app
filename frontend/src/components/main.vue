@@ -50,12 +50,16 @@ export default {
     },
   },
   mounted() {
+    console.log("/api/main");
     axios
-      .get("/api/main")
+      .get("http://18.181.162.146:8000/api/main")
       .then((res) => {
+        console.log("t");
+        console.log(res.data);
         this.posts = res.data;
       })
       .catch((err) => {
+        console.log("tt");
         console.log(err);
       });
   },
