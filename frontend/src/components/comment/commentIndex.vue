@@ -5,15 +5,24 @@
       <table class="table table-hover mt-5">
         <thead>
           <tr>
-            <th scope="col">내용</th>
             <th scope="col">작성자</th>
+            <th scope="col">내용</th>
             <th scope="col">삭제</th>
           </tr>
         </thead>
         <tbody v-for="comment in comments" :key="comment.id">
           <tr>
+            <td>
+              <v-img
+                class="profileImg"
+                max-height="70"
+                max-width="70"
+                :src="
+                  `http://35.76.24.183:8000/storage/images/${comment.user.image}`
+                "
+              ></v-img>
+            </td>
             <td>{{ comment.comment }}</td>
-            <td>{{ comment.user.name }}</td>
 
             <td>
               <button class="btn btn-danger" @click="onClickDelete(comment.id)">
@@ -60,7 +69,7 @@ export default {
       form.append("comment", this.comment);
       form.append("user_id", this.$store.state.auth.user.user.id);
       axios
-        .post("http://35.76.24.183/api/comment/" + this.post.id, form)
+        .post("http://35.76.24.183:8000/api/comment/" + this.post.id, form)
         .then(() => {
           this.comment = "";
           this.getComment();
@@ -71,7 +80,7 @@ export default {
     },
     getComment() {
       axios
-        .get("http://35.76.24.183/api/comment/" + this.post.id)
+        .get("http://35.76.24.183:8000/api/comment/" + this.post.id)
         .then((res) => {
           this.comments = res.data;
         })
@@ -82,7 +91,7 @@ export default {
     onClickDelete(id) {
       if (confirm("Are you sure to delete")) {
         axios
-          .delete("http://35.76.24.183/api/comment/" + id)
+          .delete("http://35.76.24.183:8000/api/comment/" + id)
           .then(() => {
             // this.$emit("deleted");
             // this.$parent.getComment();

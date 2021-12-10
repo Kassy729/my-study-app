@@ -13,7 +13,7 @@
         class="profileImg"
         max-height="270"
         max-width="270"
-        :src="`http://35.76.24.183/:8000/storage/images/${user.image}`"
+        :src="`http://35.76.24.183:8000/storage/images/${user.image}`"
       ></v-img>
     </v-row>
 
@@ -99,8 +99,7 @@ export default {
   },
   mounted() {
     this.getProfileImage();
-    console.log(this.user.name);
-    console.log("tttt");
+    this.user.image;
   },
   methods: {
     getProfileImage() {

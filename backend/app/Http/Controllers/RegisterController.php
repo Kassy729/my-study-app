@@ -40,7 +40,6 @@ class RegisterController extends Controller
 
     public function profile(Request $request)
     {
-        return $request;
         $id = $request->userId;
         $user = User::find($id);
 

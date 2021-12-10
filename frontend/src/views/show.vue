@@ -40,11 +40,11 @@
       </div>
 
       <ul class="list-group list-group-flush">
-        <!-- <p>좋아요 :</p> -->
         <li class="list-group-item">
           <v-row align="center">
-            <v-col cols="auto">즐겨찾기 : </v-col>
-            <v-col><like-button :post="post"/></v-col>
+            <v-col cols="auto">좋아요 : </v-col>
+            <v-col><like-button :post="post" @clickLike="getPost"/></v-col>
+            <v-col cols="10">X {{ post.likes.length }}</v-col>
           </v-row>
         </li>
         <li class="list-group-item">카테고리 : {{ post.category }}</li>
@@ -94,16 +94,19 @@ export default {
     };
   },
   mounted() {
-    axios
-      .get("http://35.76.24.183:8000/api/show/" + this.$route.params.postId)
-      .then((res) => {
-        this.post = res.data;
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    this.getPost();
   },
   methods: {
+    getPost() {
+      axios
+        .get("http://35.76.24.183:8000/api/show/" + this.$route.params.postId)
+        .then((res) => {
+          this.post = res.data;
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
     onClickUpdate(id) {
       this.$router.push({ path: "/update/" + id });
     },

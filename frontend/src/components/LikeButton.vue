@@ -55,6 +55,7 @@ export default {
         .post(`http://35.76.24.183:8000/api/like/${this.post.id}`, form)
         .then(() => {
           this.like = !this.like;
+          this.$emit("clickLike");
         })
         .catch((err) => {
           console.log(err);
