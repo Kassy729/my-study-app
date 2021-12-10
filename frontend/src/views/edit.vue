@@ -111,7 +111,7 @@ export default {
         )
         .then(() => {
           window.location.href =
-            "http://localhost:8080/show/" + this.$route.params.postId;
+            "http://35.76.24.183/show/" + this.$route.params.postId;
         })
         .catch((err) => {
           console.log(err);

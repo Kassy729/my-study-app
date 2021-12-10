@@ -90,7 +90,7 @@ export default {
       axios
         .post("http://35.76.24.183:8000/api/store", form)
         .then(() => {
-          window.location.href = "http://localhost:8080";
+          window.location.href = "http://35.76.24.183";
         })
         .catch((err) => {
           console.log(err);
